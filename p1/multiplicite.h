@@ -1,0 +1,5 @@
+#ifndef MULTIPLICITE_T
+
+#define MULTIPLICITE_T
+
+#endif MULTIPLICITE_T
