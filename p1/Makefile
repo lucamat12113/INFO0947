@@ -1,5 +1,5 @@
 CC=gcc
-LC=gcc
+LD=gcc
 CFLAGS=--std=c99 --pedantic -Wall -W -Wmissing-prototypes
 LDFLAGS=
 EXEC=output
@@ -7,7 +7,7 @@ EXEC=output
 all:$(EXEC)
 
 output: main.o multiplicite.o
-	$(LD) -o output main.o multiplicite.o
+	$(LD) -o output main.o multiplicite.o $(LDFLAGS)
 
 main.o: main.c
 	$(CC) -c main.c -o main.o $(CFLAGS)
