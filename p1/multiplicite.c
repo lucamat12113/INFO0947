@@ -5,16 +5,16 @@ int multiplicite(int *T, const int N,  int *max){
    
     int i = 0;
     int nbr = 1;
-    max = -2147483648; // le minimum pour un entier 
+    max = -32768; // le minimum pour un entier 
 
     while(i<N){
 
-        if(T[i]>max){
+        if(T[i]> *max){
 
-            max = T[i];
+            *max = T[i];
             nbr = 1;
 
-        }else if(T[i]==max){
+        }else if(T[i]== *max){
 
             nbr++;
 
