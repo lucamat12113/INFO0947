@@ -5,7 +5,7 @@ int multiplicite(int *T, const int N,  int *max){
    
     int i = 0;
     int nbr = 1;
-    *max = -32768; // le minimum pour un entier 
+    *max = -2147483647; // le minimum pour un entier 
 
     while(i<N){
 
