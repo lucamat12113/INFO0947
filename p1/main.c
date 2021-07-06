@@ -4,7 +4,7 @@
 
 int main(){
 
-   int T[8] = {13, -1, 7, 9, -12, 2, 4, 16};
+   int T[8] = {13, -1, 16, 9, -12, 2, 4, 16};
    int max;
 
    multiplicite(T, 8, &max);
