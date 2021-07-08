@@ -2,9 +2,9 @@
 
 int multiplicite(int *T, const int N,  int *max){
    
-    int i = 0;
+    int i = 1;
     int nbr = 1;
-    *max = -2147483647; // le minimum pour un entier 
+    *max = T[0]; // le minimum pour un entier 
 
     while(i<N){
 
