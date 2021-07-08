@@ -18,7 +18,7 @@
 \usepackage{eurosym}
 \usepackage{listings}
 \usepackage{color}
-\usepackage[table,xcdraw,dvipsnames]{xcolor}
+\usepackage[table,xcdraw,dvipsnames]{xcolor} 
 
 % Change le nom par défaut des listing
 \renewcommand{\lstlistingname}{Extrait de Code}
@@ -73,7 +73,7 @@
 %%%%%%%%%%%%%%%%% TITRE %%%%%%%%%%%%%%%%
 % Complétez et décommentez les définitions de macros suivantes :
 \newcommand{\intitule}{Multiplicité du maximum}
-% \newcommand{\GrNbr}{1742}
+\newcommand{\GrNbr}{S190632}
 \newcommand{\PrenomUN}{Luca}
 \newcommand{\NomUN}{Matagne}
 % \newcommand{\PrenomDEUX}{Octave}
@@ -96,65 +96,208 @@
 %%%%%%%%%%%%%%%% RAPPORT %%%%%%%%%%%%%%%
 % Écrivez votre rapport ci-dessous.
 
-\section{Insérer du code Latex}
+\section{Formalisation du problème}
 
-\begin{lstlisting}[caption={Un programme tout simple}]
-int main(void)
-{
-	// Les commandes Latex sont permises dans les commentaires sur une ligne. Exemple : $x_i \leq a ^b$
-	printf("Bonjour tout le monde !");
-	/*
-	Dans les commentaires sur plusieurs lignes, elles doivent être entourées
-	de symboles définis par l'option « escapeinside » de \lstset
-	(>\coms{$\sum_{i = 1}^N 1 = N$}<)
-	La commande « \coms » permet de colorer correctement le code latex ajouté.
-	Les accents et tous les autres diacritiques sont permis : àÀçÇéÉèÈêÊœŒ...
-	*/
-	return 1; (>\label{code:ret}<)
+
+
+
+
+\section{Spécification formelle}
+
+
+
+
+
+
+
+\section{Découpe en sous problèmes}
+
+Etant donné que le problème s'articule autour d'une seule boucle principale et que le fait de diviser le problème en deux SP qui seraient :
+
+1) Recherche du maximum
+
+2) Comptage du nombre d'occurence du maximum
+
+amènerait a une mécompréhension (une telle découpe laisserait croire qu'il nous faut deux boucles).
+Je décide de ne pas diviser le problème principal en différents SP.
+
+
+
+
+\section{Invariant graphique et formel de la boucle}
+
+\begin{center}
+
+Voici l'invariant graphique de ma boucle 'while':
+
+\includegraphics[width=0.70\textwidth]{gliprojet1.png}
+
+\end{center}
+
+Et voici l'invariant formel qui en découle:
+
+\begin{center}
+
+N>0 $\land$ T[N] != NULL $\land$ 1$\leq$i$\leq$N $\land$ max = max(T[i]) $\land$ nbr$\geq$1
+
+\end{center}
+
+\section{Approche constructive}
+
+Dans cette section se trouve l'approche constructive qui m'a permis de construire mon fichier "multiplicite.c" 
+\subsection{Code d'innitialisation de la boucle}
+
+\begin{lstlisting}[caption={Code d'innitialisation de la boucle}]
+
+//{N>0 $\land$ T[N] != NULL}
+int i = 1;
+//{N>0 $\land$ T[N] != NULL $\land$ 1$\leq$i$\leq$N}
+int nbr = 1;
+//{N>0 $\land$ T[N] != NULL $\land$ 1$\leq$i$\leq$N $\land$ nbr$\geq$1}
+int max = T[i];
+//N>0 $\land$ T[N] != NULL $\land$ 1$\leq$i$\leq$N $\land$ max = max(T[i]) $\land$ nbr$\geq$1
+
+\end{lstlisting}
+
+\subsection{Corps de la boucle}
+
+\begin{lstlisting}[caption={Corps de la boucle}]
+
+//N>0 $\land$ T[N] != NULL $\land$ 1$\leq$i$\leq$N $\land$ max = max(T[i]) $\land$ nbr$\geq$1
+while(i<N);
+//N>0 $\land$ T[N] != NULL $\land$ 1$\leq$i$\leq$N $\land$ max = max(T[i]) $\land$ nbr$\geq$1 $\land$ i<N
+if(T[i] > max){
+//N>0 $\land$ T[N] != NULL $\land$ 1$\leq$i<N $\land$ max = max(T[i]) $\land$ nbr$\geq$1 $\land$ i<N $\land$ T[i]>max
+max = T[i];
+nbr = 1;
+}
+//N>0 $\land$ T[N] != NULL $\land$ 1$\leq$i<N $\land$ max = max(T[i]) $\land$ nbr$\geq$1
+else if(T[i]==max){
+//N>0 $\land$ T[N] != NULL $\land$ 1$\leq$i<N $\land$ max = max(T[i]) $\land$ nbr$\geq$1 $\land$ T[i]=max
+nbr++;
+}
+//N>0 $\land$ T[N] != NULL $\land$ 1$\leq$i<N $\land$ max = max(T[i]) $\land$ nbr$\geq$1
+i++;
+//N>0 $\land$ T[N] != NULL $\land$ 1$\leq$i$\leq$N $\land$ max = max(T[i]) $\land$ nbr$\geq$1
+
+\end{lstlisting}
+
+
+\subsection{Code de terminaison de la boucle}
+
+\begin{lstlisting}[caption={Code de terminaison de la boucle}]
+
+//N>0 $\land$ T[N] != NULL $\land$ max = max(T[i]) $\land$ nbr$\geq$1 $\land$ i=N
+//N>0 $\land$ T[N] != NULL $\land$ max = max(T[N]) $\land$ nbr$\geq$1
+return nbr;
+//N>0 $\land$ T[N] != NULL $\land$ max = max(T[N]) $\land$ multiplicite = nombre d'occurence du maximum
+
+\end{lstlisting}
+
+
+\section{Code complet}
+
+
+\subsection{main.c}
+
+\begin{lstlisting}[caption={Main.c}]
+#include <stdio.h>
+#include "multiplicite.h"
+
+
+int main(){
+
+   int T[8] = {13, -1, 16, 9, -12, 2, 4, 16};
+   int max;
+
+   multiplicite(T, 8, &max);
+
+   printf("%d - %d\n", multiplicite(T, 8, &max), max);
+}//fin main
+\end{lstlisting}
+
+
+\subsection{multiplicite.c}
+
+\begin{lstlisting}[caption={multiplicite.c}]
+#include "multiplicite.h"
+
+int multiplicite(int *T, const int N,  int *max){
+   
+    int i = 1;
+    int nbr = 1;
+    *max = T[0]; // le minimum pour un entier 
+
+    while(i<N){
+
+        if(T[i]> *max){
+
+            *max = T[i];
+            nbr = 1;
+
+        }else if(T[i]== *max){
+
+            nbr++;
+
+        }
+
+        i++;
+
+    }
+
+   return nbr;
+
 }
 \end{lstlisting}
 
-Il est possible de faire référence à la ligne \ref{code:ret} de l'extrait de code.
 
-\section{Dessiner un tableau}
+\subsection{multiplicite.h}
 
-Comme mentionné sur le forum «~\emph{eCampus > Forum : Projets -- Informations générales > Thème : Dessine-moi un invariant !}~», il est possible de dessiner facilement des tableaux. Le résultat de l'exemple donné sur le forum eCampus est visible dans la figure \ref{fig:exemple}.
+\begin{lstlisting}[caption={multiplicite.h}]
+#ifndef __MULTIPLICITE_T__
+#define __MULTIPLICITE_T__
 
-\begin{figure}[!h]
-\centering
-\begin{tabular}{l|llr|ll|l}
- & 0 &  & \multicolumn{1}{r|}{i-1} & i &  & N \\ \cline{2-6}
-t: & \cellcolor[HTML]{FFCC67} & \cellcolor[HTML]{FFCC67}. > 0 & \cellcolor[HTML]{FFCC67} &  &  &  \\ \cline{2-6}
-\end{tabular}
-\caption{Voici le tableau de l'exemple}
-\label{fig:exemple}
-\end{figure}
- 
-\section{Autres conseils}
+/**
+ * multiplicite
+ * 
+ * @pre : N > 0, T est un tableau d'entier
+ * 
+ * @post : max contient le maximum du tableau
+ * 
+ * @return : le nombre d'occurence de max
+ * 
+**/
 
-\subsection{Utilisez les bons opérateurs}
+int multiplicite(int *T, const int N,  int *max);
 
-Voir la table \ref{table:op}.
+#endif
+\end{lstlisting}
 
-\begin{table}[!h]
-\centering
-\begin{tabular}{l c}
-Nom & Op \\
-\hline
-ET & $\land$ \\
-OU & $\lor$ \\
-Quantification universelle & $\forall$ \\
-Quantification existentielle & $\exists$ \\
-\end{tabular}
-\caption{Opérateurs les plus usuels en logique}
-\label{table:op}
-\end{table}
 
-\subsection{Trouver un symbole précis}
+\subsection{makefile}
 
-Voir ce site : \url{http://detexify.kirelabs.org/classify.html}. Il suffit de dessiner le symbole dont vous avez besoin et le site trouvera (normalement) la bonne commande à taper (ainsi que le package à éventuellement inclure si besoin est).
+\begin{lstlisting}[caption={makefile}]
+CC=gcc
+LD=gcc
+CFLAGS=--std=c99 --pedantic -Wall -W -Wmissing-prototypes
+LDFLAGS=
+EXEC=output
 
-\subsection{N'oubliez pas de relire le résultat produit par la compilation}
+all:$(EXEC)
+
+output: main.o multiplicite.o
+	$(LD) -o output main.o multiplicite.o $(LDFLAGS)
+
+main.o: main.c
+	$(CC) -c main.c -o main.o $(CFLAGS)
+
+multiplicite.o: multiplicite.c multiplicite.h
+	$(CC) -c multiplicite.c -o multiplicite.o $(CFLAGS)
+\end{lstlisting}
+
+
+
+
 
 \end{document}
 
