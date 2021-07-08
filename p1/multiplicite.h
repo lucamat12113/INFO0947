@@ -4,7 +4,7 @@
 /**
  * multiplicite
  * 
- * @pre : N > 0, T[N]!= NULL
+ * @pre : N > 0 ∧ T[N]!= NULL
  * 
  * @post : max = max(T[N])
  * 
