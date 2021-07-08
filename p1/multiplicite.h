@@ -4,9 +4,9 @@
 /**
  * multiplicite
  * 
- * @pre : N > 0, T est un tableau d'entier
+ * @pre : N > 0, T[N]!= NULL
  * 
- * @post : max contient le maximum du tableau
+ * @post : max = max(T[N])
  * 
  * @return : le nombre d'occurence de max
  * 
