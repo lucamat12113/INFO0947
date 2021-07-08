@@ -104,10 +104,29 @@
 
 \section{Spécification formelle}
 
+Il est importatn de déterminer la précondition et la postcondition de notre problèmes, qui seront le point de départ (pré) et d'arrivée (post)  de notre raisonnement constructif.
 
+Voici ces conditions:
 
+\begin{itemize}
 
+\item Précondition
 
+\begin{center}
+    
+ N > 0 $\land$ T[N]!= NULL    
+
+\end{center}
+
+\item Postcondition
+
+\begin{center}
+    
+ max = max(T[N]) $\land$ multiplicite()=nombre d'occurence du maximum 
+
+\end{center}
+
+\end{itemize}
 
 
 \section{Découpe en sous problèmes}
@@ -260,11 +279,11 @@ int multiplicite(int *T, const int N,  int *max){
 /**
  * multiplicite
  * 
- * @pre : N > 0, T est un tableau d'entier
+ * @pre : N > 0 $\land$ T[N]!= NULL
  * 
- * @post : max contient le maximum du tableau
+ * @post : max = max(T[N]) 
  * 
- * @return : le nombre d'occurence de max
+ * @return : multiplicite()=nombre d'occurence du maximum 
  * 
 **/
 
