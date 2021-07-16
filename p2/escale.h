@@ -1,10 +1,10 @@
 /**
  * \file escale.h
- * \brief ADT for managing the Vector type
+ * \brief ADT for managing the 'Escale'' type
  * \author Luca Matagne -- Université de Liège (ULg)
  * \date 16/07/2021
  *
- * Presents a Vector as an abstract data type
+ * Presents a 'Escale' (stepover) as an abstract data type
  */
 
 
