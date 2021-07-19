@@ -53,6 +53,43 @@ void how_many_escale(Course *race);
  */
 void how_many_step(Course *race);
 
+/**
+ * \fn void best_time_race(Course *race);
+ * \brief gets the best time for the whole race
+ * 
+ * \param race, the race that we're talking about
+ */
+void best_time_race(Course *race);
+
+/**
+ * \fn void best_time_step(Escale *step);
+ * \brief gzts the best time for a single step(from a stepover to the ext one)
+ * 
+ * \param step, the step that we are talking about (stored with the name of the stepover where the step finish)
+ */
+void best_time_step(Escale *step);
+
+/**
+ * \fn Course *add_step(Course *race, Escale *step);
+ * \brief add a stepover (ADT 'Escale')to the race
+ * 
+ * \param step, the step to add to the race (!=NULL)
+ * \param race, the race to add oa step in (!=NULL)
+ * 
+ * \return the new race with the new step
+ */
+Course *add_step(Course *race, Escale *step);
+
+/**
+ * \fn Course *remove_step(Course *race, Escale *step);
+ * \brief rmeove a stepover (ADT Escale) 
+ * 
+ * \param step, the step to remove to the race (!=NULL)
+ * \param race, the race to remove a step in (!=NULL)
+ * 
+ * \return the new race without the step that we removed
+ */
+Course *remove_step(Course *race, Escale *step);
 
 
 #endif

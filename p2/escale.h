@@ -46,7 +46,7 @@ Escale *set_time(Escale *step, float time);
  * 
  * \param step, the stepover to get. (!=NULL)
  * 
- * \return all the 'escale' struct
+ * \return all the 'escale' ADT
  */ 
 void *get(Escale *step);
 
