@@ -25,10 +25,33 @@ typedef struct Course_t Course;
  * \param step1, the first stepover of the rece (the start). (step1!=NULL)
  * \param step2, the second stepover. (!=NULL)
  * 
- * \return a brief race with a ingle step
+ * \return a brief race with a single step
  */
 Course *create(Escale *step1, Escale *step2);
 
+/**
+ * \fn void *is_a_loop(Course *race);
+ * \brief determinates if the race is a loop or not
+ * 
+ * \param race, the race which is (or not) a loop
+ */
+void is_a_loop(Course *race);
+
+/**
+ * \fn void how_many_escale(Course *race);
+ * \brief counts how many stepover there is in a race
+ * 
+ * \param race, the race that we're talking about
+ */
+void how_many_escale(Course *race);
+
+/**
+ * \fn void how_many_step(Course *race);
+ * \brief counts how many step there is in the race
+ * 
+ * \param race, the race that we are talking about
+ */
+void how_many_step(Course *race);
 
 
 
