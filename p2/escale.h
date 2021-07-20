@@ -59,7 +59,7 @@ void *get(Escale *step);
  * 
  * \return the distance between the two cities
  */
-float calc_distance(Escale *step1, Escale *step2);
+float calc_distance(Escale *step_depart, Escale *step);
 
 
 
