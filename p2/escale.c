@@ -16,17 +16,39 @@ struct Escale_t {
 
 Escale *create(float x, float y, char *name){
 
-    Escale *stepover = malloc(sizeof(Escale));
-    if(stepover==NULL)
+    Escale *step = malloc(sizeof(Escale));
+    if(step==NULL)
         return NULL;
 
-    stepover->x = x;
-    stepover->y = y;
-    stepover->name = name;
+    step->x = x;
+    step->y = y;
+    step->name = name;
 
-    return stepover;
+    return step;
 
 
 };//end create()
 
 
+Escale *set_time(Escale *step, float time){
+
+    assert(step!=NULL);
+    if(step==NULL);
+        return NULL;
+        
+    step->time=time;
+
+    return step;
+
+};//end set_time()
+
+
+void *get(Escale *step){
+
+    
+
+};//end get
+
+
+
+   
