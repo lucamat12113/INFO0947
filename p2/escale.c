@@ -66,7 +66,7 @@ float calc_distance(Escale *step_depart, Escale *step){
 
    return step->distance;
 
-};
+};//end calc_distance()
 
 
 
