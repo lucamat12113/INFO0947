@@ -62,12 +62,12 @@ int how_many_step(Course *race);
 float best_time_race(Course *race);
 
 /**
- * \fn void best_time_step(Escale *step);
- * \brief gzts the best time for a single step(from a stepover to the ext one)
+ * \fn flaot best_time_step(Escale *step);
+ * \brief gets the best time for a single step(from a stepover to the ext one)
  * 
  * \param step, the step that we are talking about (stored with the name of the stepover where the step finish)
  */
-void best_time_step(Escale *step);
+float best_time_step(Escale *step);
 
 /**
  * \fn Course *add_step(Course *race, Escale *step);

@@ -34,7 +34,6 @@ Course *create(Escale *step1, Escale *step2){
 char *is_a_loop(Course *race){
     
     assert(race!=NULL);
-        return NULL;
 
     if(race->step[0]==race->step[race_lenght-1])
         race->circuit="oui";
@@ -49,7 +48,6 @@ char *is_a_loop(Course *race){
 int how_many_escale(Course *race){
 
     assert(race!=NULL);
-        return NULL;
 
     race->nbr_escale=race_lenght;
 
@@ -61,7 +59,6 @@ int how_many_escale(Course *race){
 int how_many_step(Course *race){
 
     assert(race!=NULL);
-        return NULL;
 
     race->nbr_step=race_lenght-1;
 
@@ -73,18 +70,17 @@ int how_many_step(Course *race){
 float best_time_race(Course *race){
 
     assert(race!=NULL);
-        return NULL;
-
 
     int i;
+    int btr=0;
     for(i=0; i<race_lenght; i++){
-
+        
+        btr += race->step[i]->time;
           
-    }
-
+    };
 
     race->best_time_race = btr;
 
-    
+    return race->best_time_race;
 
-}
+}//end best_time_race()
