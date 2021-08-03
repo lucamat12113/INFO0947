@@ -30,36 +30,36 @@ typedef struct Course_t Course;
 Course *create(Escale *step1, Escale *step2);
 
 /**
- * \fn void *is_a_loop(Course *race);
+ * \fn char *is_a_loop(Course *race);
  * \brief determinates if the race is a loop or not
  * 
  * \param race, the race which is (or not) a loop
  */
-void is_a_loop(Course *race);
+char *is_a_loop(Course *race);
 
 /**
- * \fn void how_many_escale(Course *race);
+ * \fn int how_many_escale(Course *race);
  * \brief counts how many stepover there is in a race
  * 
  * \param race, the race that we're talking about
  */
-void how_many_escale(Course *race);
+int how_many_escale(Course *race);
 
 /**
- * \fn void how_many_step(Course *race);
+ * \fn int how_many_step(Course *race);
  * \brief counts how many step there is in the race
  * 
  * \param race, the race that we are talking about
  */
-void how_many_step(Course *race);
+int how_many_step(Course *race);
 
 /**
- * \fn void best_time_race(Course *race);
+ * \fn float best_time_race(Course *race);
  * \brief gets the best time for the whole race
  * 
  * \param race, the race that we're talking about
  */
-void best_time_race(Course *race);
+float best_time_race(Course *race);
 
 /**
  * \fn void best_time_step(Escale *step);

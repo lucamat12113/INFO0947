@@ -59,10 +59,6 @@ float calc_distance(Escale *step_depart, Escale *step){
     float y_squared = (step->y - step_depart->y)*(step->y - step_depart->y);
     step->distance = sqrt(x_squared + y_squared);
 
-    /*
-    EUH OUAI FAUT VOIR SI JE PEUX INCLURE 'MATH.H'
-    */
-
    return step->distance;
 
 };//end calc_distance()
