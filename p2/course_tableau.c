@@ -126,7 +126,7 @@ race_lenght+=1;
 Course *remove_step(Course *race, Escale *step){
 
 race_lenght-=1;
-    Course *race = realloc(race, sizeof(Course));
+    race = realloc(race, sizeof(Course));
     if(race==NULL)
         return NULL;
     else
