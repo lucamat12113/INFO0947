@@ -27,7 +27,7 @@ typedef struct Escale_t Escale;
  * 
  * \return a stepover (contact information and name) that is able to store all the necessary information (best time). NULL otherwise
  */
-Escale *create(float x, float y, char *name);
+Escale *creation(float x, float y, char *name);
 
 /**
  * \fn Escale *set_time(Escale *step, float time);

@@ -15,7 +15,7 @@ struct Escale_t {
 };
 
 
-Escale *create(float x, float y, char *name){
+Escale *creation(float x, float y, char *name){
 
     Escale *step = malloc(sizeof(Escale));
     if(step==NULL)
