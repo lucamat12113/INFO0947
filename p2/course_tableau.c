@@ -27,7 +27,7 @@ Course *create(Escale *step1, Escale *step2){
 
     return race;
 
-};//end creat()
+}//end creat()
 
 
 char *is_a_loop(Course *race){
@@ -41,7 +41,7 @@ char *is_a_loop(Course *race){
     
     return race->circuit;
 
-};//end is_a_loop()
+}//end is_a_loop()
 
 
 int how_many_escale(Course *race){
