@@ -12,7 +12,6 @@ char *circuit;
 int nbr_escale;
 int nbr_step;
 float best_time_race;
-float best_time_step;
 
 };
 
@@ -72,7 +71,7 @@ float best_time_race(Course *race){
     assert(race!=NULL);
 
     int i;
-    int btr=0;
+    float btr=0;
     for(i=0; i<race_lenght; i++){
         
         btr += race->step[i]->time;
@@ -84,3 +83,28 @@ float best_time_race(Course *race){
     return race->best_time_race;
 
 }//end best_time_race()
+
+
+float best_time_step(Course *race, Escale *step){
+
+    assert(step!=NULL && race!=NULL);
+
+    int i;
+    float bts=0;
+    for(i=0; i<race_lenght; i++){
+
+        if(step==race->step[i])
+            bts = race->step[i]->time;
+
+    };
+
+    return bts;
+
+}//end best_time_step()
+
+
+Course *add_step(Course *race, Escale *step){
+
+
+
+}//end add_step()

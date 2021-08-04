@@ -67,7 +67,7 @@ float best_time_race(Course *race);
  * 
  * \param step, the step that we are talking about (stored with the name of the stepover where the step finish)
  */
-float best_time_step(Escale *step);
+float best_time_step(Course *race, Escale *step);
 
 /**
  * \fn Course *add_step(Course *race, Escale *step);
