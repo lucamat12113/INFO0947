@@ -105,6 +105,33 @@ float best_time_step(Course *race, Escale *step){
 
 Course *add_step(Course *race, Escale *step){
 
+race_lenght+=1;
+    Course *race = realloc(race, sizeof(Course));
+    if(race==NULL)
+        return NULL;
 
+    int i;
+    for(i=0; i<race_lenght; i++){
+        
+        if(i==race_lenght-1)
+            race->step[i]=step;
+          
+    };
+
+    return race;
 
 }//end add_step()
+
+
+Course *remove_step(Course *race, Escale *step){
+
+race_lenght-=1;
+    Course *race = realloc(race, sizeof(Course));
+    if(race==NULL)
+        return NULL;
+    else
+        return race;
+
+
+
+}//end remove_step()
