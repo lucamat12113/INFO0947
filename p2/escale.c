@@ -28,7 +28,7 @@ Escale *creation(float x, float y, char *name){
     return step;
 
 
-};//end create()
+}//end create()
 
 
 Escale *set_time(Escale *step, float time){
@@ -39,7 +39,7 @@ Escale *set_time(Escale *step, float time){
 
     return step;
 
-};//end set_time()
+}//end set_time()
 
 
 void *get(Escale *step){
@@ -48,7 +48,7 @@ void *get(Escale *step){
 
     return step;
 
-};//end get
+}//end get
 
 
 float calc_distance(Escale *step_depart, Escale *step){
@@ -61,7 +61,7 @@ float calc_distance(Escale *step_depart, Escale *step){
 
    return step->distance;
 
-};//end calc_distance()
+}//end calc_distance()
 
 
 
