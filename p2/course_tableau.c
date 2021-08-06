@@ -1,13 +1,14 @@
 
 #include <stdlib.h>
 #include <assert.h>
+
 #include "course.h"
 
-race_lenght = 2;
+
 
 struct Course_t {
 
-Escale step[race_lenght];
+Escale *step;
 char *circuit;
 int nbr_escale;
 int nbr_step;
@@ -15,12 +16,15 @@ float best_time_race;
 
 };
 
+race_lenght = 2;
+
 Course *create(Escale *step1, Escale *step2){
 
-    Course *race = malloc(sizeof(Course));
+    Course *race = malloc(race_lenght*sizeof(Course));
     if(race==NULL)
         return NULL;
 
+    Escale *step = malloc(race_lenght*sizeof(Escale));
     
     race->step[0]=step1;
     race->step[1]=step2;
