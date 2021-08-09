@@ -19,6 +19,12 @@
 typedef struct Course_t Course;
 
 /**
+ * \struct List
+ * \brief Data structure representing a List as a contiguous array.  The array is expandable.
+ */
+typedef struct List_t List;
+
+/**
  * \fn Course *create(Escale *step1, Escale *step2);
  * \brief create a race with two stepovers, the best time at the first one is set to 0
  * 
