@@ -42,6 +42,15 @@ Escale *set_time(Escale *step, float time){
 }//end set_time()
 
 
+float get_time(Escale *step){
+
+    assert(step!=NULL);
+
+    return step->time;
+
+}//end get_time()
+
+
 void *get(Escale *step){
 
     assert(step!=NULL);

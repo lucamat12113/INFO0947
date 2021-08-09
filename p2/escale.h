@@ -13,7 +13,7 @@
 
 /**
  * \struct escale
- * \brief Data structure representing a stopover
+ * \brief Data structure representing a stepover
  */
 typedef struct Escale_t Escale;
 
@@ -39,6 +39,16 @@ Escale *creation(float x, float y, char *name);
  * \return the stepover with the element 'time' that contains the time to finish the step.
  */
 Escale *set_time(Escale *step, float time);
+
+/**
+ * \fn Float get_time(Escale *step);
+ * \brief get the best time to make this step of the race
+ * 
+ * \param step, the stepover for which we are looking for time. (!=NULL)
+ * 
+ * \return the stepover with the element 'time' that contains the time to finish the step.
+ */
+float get_time(Escale *step);
 
 /**
  * \fn void *get(Escale *step);

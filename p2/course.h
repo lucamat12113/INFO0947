@@ -18,11 +18,6 @@
  */
 typedef struct Course_t Course;
 
-/**
- * \struct List
- * \brief Data structure representing a List as a contiguous array.  The array is expandable.
- */
-typedef struct List_t List;
 
 /**
  * \fn Course *create(Escale *step1, Escale *step2);
@@ -84,7 +79,7 @@ float best_time_step(Course *race, Escale *step);
  * 
  * \return the new race with the new step
  */
-Course *add_step(Course *race, Escale *step);
+Course *add_step(Course *race, int i, Escale *newStep);
 
 /**
  * \fn Course *remove_step(Course *race, Escale *step);
@@ -95,7 +90,7 @@ Course *add_step(Course *race, Escale *step);
  * 
  * \return the new race without the step that we removed
  */
-Course *remove_step(Course *race, Escale *step);
+Course *remove_step(Course *race, int i);
 
 
 #endif
