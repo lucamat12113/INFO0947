@@ -32,19 +32,6 @@ static cell *create_cell(Escale *step){
 }//end create_cell()
 
 
-int how_many_escale(Course *race){
-    int longueur = 0;
-    Course *p = race;
-    
-    while(p!=NULL){
-        longueur++;
-        p = p->next;
-    }//end while
-    
-    return longueur;
-}//end length()
-
-
 Course *create(Escale *step1, Escale *step2){
     assert(step1!=NULL && step2!=NULL);
 
@@ -73,3 +60,37 @@ Course *create(Escale *step1, Escale *step2){
 
 }//end create()
 
+
+char *is_a_loop(Course *race){
+
+    Course *p = race;
+
+    Escale* comp1 = p->step;
+
+    while(p->next!=NULL){
+        p=p->next;
+    }//end while
+
+    Escale* comp2 = p->step;
+    char circuit[4] = "oui";
+    char n_circuit[4] = "non";
+
+    if(comp1==comp2)
+        return circuit;
+    else
+        return n_circuit;
+
+}//end is_a_loop()
+
+
+int how_many_escale(Course *race){
+    int longueur = 0;
+    Course *p = race;
+    
+    while(p!=NULL){
+        longueur++;
+        p = p->next;
+    }//end while
+    
+    return longueur;
+}//end length()
