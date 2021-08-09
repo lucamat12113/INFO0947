@@ -66,7 +66,8 @@ float calc_distance(Escale *step_depart, Escale *step){
 
     float x_squared = (step->x - step_depart->x)*(step->x - step_depart->x);
     float y_squared = (step->y - step_depart->y)*(step->y - step_depart->y);
-    step->distance = sqrt(x_squared + y_squared);
+    double somme = (x_squared + y_squared);
+    step->distance = sqrt(somme);
 
    return step->distance;
 

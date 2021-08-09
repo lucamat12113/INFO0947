@@ -71,6 +71,14 @@ void *get(Escale *step);
  */
 float calc_distance(Escale *step_depart, Escale *step);
 
-
+/**
+ * \fn double sqrt(square);
+ * \brief calculates the square root (math.h)
+ * 
+ * \param square, the square  
+ * 
+ * \return the square root
+ */
+double sqrt(square);
 
 #endif

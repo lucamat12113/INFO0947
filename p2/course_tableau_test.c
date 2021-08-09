@@ -5,16 +5,10 @@
 #include "escale.h"
 
 
-static void print(Course *race){
+static Course *print(Course *race){
     assert(race!=NULL);
     
-    int i;
-    Escale *step;
-    
-    for(i=0; i<how_many_escale(race); i++){
-        step = (Escale *)get(race);
-        
-    }//end for - i
+    return race;
 }//end print()
 
 int main(){
@@ -27,6 +21,8 @@ int main(){
     Escale *step3 = creation(50.83, 4.39, "Bruxelles");
 
     race = add_step(race, 3, step3);
+
+    print(race);
     
     return 1;
     

@@ -46,7 +46,7 @@ static Course *realloc_array(Course *race){
  * \return A pointer to the new Course.
  */
 static Course *shift_right(Course *race, int begin){
-    assert(race != NULL && 0<= begin && begin <= length(race));
+    assert(race != NULL && 0<= begin && begin <= race->length);
     
     if(race->length + 1 >= race->array_size)
         race = realloc_array(race);
