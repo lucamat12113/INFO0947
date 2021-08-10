@@ -24,4 +24,4 @@ course_liste.o: course_liste.c course.h
 	$(CC) -c course_liste.c -o course_liste.o $(CFLAGS)
 
 escale.o: escale.c escale.h
-	$(CC) -c escale.c -o escale.o $(CFLAGS)
+	$(CC) -c escale.c -lm -o escale.o $(CFLAGS)

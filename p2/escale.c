@@ -64,8 +64,8 @@ float calc_distance(Escale *step_depart, Escale *step){
 
     assert(step_depart!=NULL && step!=NULL);
 
-    float acos= arccos((sin(step_depart->x)*sin(step->x))+(cos(step_depart->y)*cos(step->y)));
-    step->distance =acos * 6371;
+    float arccos= acos((sin(step_depart->x)*sin(step->x))+(cos(step_depart->y)*cos(step->y)));
+    step->distance =arccos * 6371;
 
     return step->distance;
 
