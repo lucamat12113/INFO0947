@@ -64,12 +64,10 @@ float calc_distance(Escale *step_depart, Escale *step){
 
     assert(step_depart!=NULL && step!=NULL);
 
-    float x_squared = (step->x - step_depart->x)*(step->x - step_depart->x);
-    float y_squared = (step->y - step_depart->y)*(step->y - step_depart->y);
-    double somme = (x_squared + y_squared);
-    step->distance = sqrt(somme);
+    float acos= arccos((sin(step_depart->x)*sin(step->x))+(cos(step_depart->y)*cos(step->y)));
+    step->distance =acos * 6371;
 
-   return step->distance;
+    return step->distance;
 
 }//end calc_distance()
 

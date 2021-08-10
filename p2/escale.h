@@ -79,6 +79,6 @@ float calc_distance(Escale *step_depart, Escale *step);
  * 
  * \return the square root
  */
-double sqrt(square);
+
 
 #endif
