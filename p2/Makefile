@@ -5,7 +5,7 @@ LDFLAGS=
 
 all:$(EXEC)
 
-tableau: escale.o course_tableau.o course_tableau_test.o 
+test_array: escale.o course_tableau.o course_tableau_test.o 
 	$(LD) -o tableau escale.o course_tableau.o course_tableau_test.o  $(LDFLAGS)
 
 course_tableau_test.o: course_tableau_test.c
@@ -14,7 +14,7 @@ course_tableau_test.o: course_tableau_test.c
 course_tableau.o: course_tableau.c course.h 
 	$(CC) -c course_tableau.c -o course_tableau.o $(CFLAGS)
 
-liste: escale.o course_liste.o course_liste_test.o 
+test_list: escale.o course_liste.o course_liste_test.o 
 	$(LD) -o liste escale.o course_liste.o course_liste_test.o  $(LDFLAGS)
 
 course_liste_test.o: course_liste_test.c
