@@ -139,7 +139,7 @@ float best_time_step(Course *race, Escale *step){
     Course *p = race;
     float bts = 0;
 
-    while(p!=step){
+    while(p->step!=step){
         p=p->next;
     }//end while()
     
@@ -204,5 +204,6 @@ Course *remove_step(Course *race, int i){
     p_cour->next = NULL;
     free(p_cour);
 
+    return race;
 
 }//end remove_step()
