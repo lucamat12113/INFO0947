@@ -175,23 +175,69 @@ traiter.
 \textit{\textbf{Traitement(s, n) = Traitement(s[n], n) + Traitement(s, n-1)}}
 \end{center}
 
+
 \subsection{Synthèse}
 
 
+La formalisation récursive de \textit{Traitement} est donc:
+
+\begin{center}
+\textit{\textbf{Traitement(s, n) =}} 
+
+\textit{\textbf{Transfo(s[0])}} {\large si n = 0}
+
+\textit{\textbf{{\large ET}}} 
+
+\textit{\textbf{Traitement(s, n) =}} 
+
+
+\textit{\textbf{Traitement(s[n], n) + Traitement(s, n-1)}} {\large sinon}
+\end{center}
+
 
 \section{Spécification}\label{specification}
-%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% Fournissez et discutez ici la spécification formelle de la fonction
-% hexa_dec_rec()
-%
+
+
+Etant donné l'utilisation du Pseudo Langage vu au cours, il n'est pas nécessaire 
+de vérifier que le pointeur représentant la chaine de caractères est valide
+cependant nous allons vérifier que notre chaine existe grâce à sa longueur.
+
+Notons que dans cette section nous reprendrons les notations introduite au début 
+de ce rapport.
+
+\begin{center}
+{\large PréCondition} $\equiv n > 0$
+\end{center}
+
+L'objectif de notre fonction est de tranformer un nombre hexadécimale (sous forme 
+de chaine de caractères) en un nombre décimale. En accord avec le code fourni, 
+appelons la $hexa\_dec\_rec$. Elle prendra comme argument la chaine de caractère
+donnée et sa longueur sous forme d$'$un entier.
+
+\begin{center}
+{\large Postondition} $\equiv hexa\_dec\_rec = Traitement(s,n)$
+\end{center}
+
+Au final l'interface de la fonnction est:
+
+\begin{lstlisting}
+/* 
+ * @pre: n > 0
+ * @post: hexa_dec_rec = Traitement(s,n)
+ */
+hexa_dec_rec(s,n)=(int x)
+\end{lstlisting}
+
 
 \section{Construction Récursive}\label{recur}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% Fournissez et discutez ici la construction formelle (avec les assertions
-% intermédiaires) de la fonction hexa_dec_rec()
-%
+
+
+\subsection{Programmation défensive}
+
+
+En accord avec les préconditions, nous devons nous assurer que la chaine est
+utilisable et donc que sa longueur n'est pas nulle. Dans le pseudo code 
+
 
 \section{Traces d'Exécution}\label{traces}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
