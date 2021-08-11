@@ -43,5 +43,4 @@ unsigned int hexa_dec_rec(char *hexa, int n){
   else
     return convert(hexa[n-1]) + 16 * hexa_dec_rec(hexa, (n-1));
   
-  return 0;
 }//fin hexa_dec_rec()
