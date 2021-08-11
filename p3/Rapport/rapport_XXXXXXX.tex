@@ -72,12 +72,14 @@
 
 %%%%%%%%%%%%%%%%% TITRE %%%%%%%%%%%%%%%%
 % Complétez et décommentez les définitions de macros suivantes :
-\newcommand{\intitule}{Le titre du travail}
-\newcommand{\Prenom}{Galileo}
-\newcommand{\Nom}{Galilei}
-\newcommand{\matricule}{s201234}
+\newcommand{\intitule}{Compléments de Programmation
+
+Récursivité et Élimination de la Récursivité}
+\newcommand{\Prenom}{Luca}
+\newcommand{\Nom}{Matagne}
+\newcommand{\matricule}{s190632}
 % Décommentez ceci si vous voulez une table des matières :
-% \renewcommand{\tablemat}{\tableofcontents}
+\renewcommand{\tablemat}{\tableofcontents}
 
 %%%%%%%% ZONE PROTÉGÉE : MODIFIEZ UNE DES DIX PROCHAINES %%%%%%%%
 %%%%%%%%            LIGNES POUR PERDRE 2 PTS.            %%%%%%%%
@@ -97,9 +99,85 @@
 
 \section{Formulation Récursive}\label{formulation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% Fournissez et discutez ici la formulation récursive du problème
-%
+\subsection{Définition récursive}
+Nous observons que :
+
+\begin{lstlisting}
+
+Un nombre décimal est un nombre hexadécimal ayant subi une transformation et 
+qu un nombre hexadécimal est un caractère représentant une puissance de 16
+ajouté à la suite d une chaine de caractère représentant les puissance de 16
+supérieures
+
+\end{lstlisting}
+
+Nous avons donc défini la structure « chaine de caractères(représentant un nombre
+hexadécimal) »  récursivement. Nous allons donc formuler la transformation d’une
+chaine de caractères en noombre décimaux sur base de cette définition récursive.
+
+Appelons notre notation \textit{Traitement(s,n)}, avec \textit{s} une chaine de
+caractères et \textit{n} sa longueur et appelons \textit{Transfo(s[n])} la 
+transformation (permettant de passer de hexadécimal à décimal) de l'élément de 
+rang n dans la chaine de caractères s.
+
+\subsection{Cas de base}
+
+Une chaine de caractères composée d'un seul caractère est une chaine de caractère
+représentant la puissance 0 de 16 en nombre hexadécimal.
+Lorsq'uon lui applique la transformation en nombre décimal, on obtient le résultat suivant: 
+
+\centerline{\includegraphics[height=8cm, width=3cm]{AA.png}}
+
+Exemple:
+
+\begin{center}
+s={'A,/0'}
+
+\textit{\textbf{Traitement(s,1)=Transfo(s[0])=11}}
+\end{center}
+
+\subsection{Cas récursif}
+
+Pour déterminer le cas récursif, observons un exemple:
+
+\begin{center}
+\textbf{'A23' $\rightarrow$ 2595}
+\end{center}
+
+Imaginons que l$'$on découpe la chaine \textbf{'A23'} selon la définition 
+récursive, on a
+
+\begin{center}
+\textbf{'A2 || 3' $\rightarrow$ 'A2' + 3 $*$ 1}    
+
+$=$
+
+\textbf{'A2 || 3' $\rightarrow$ 'A2' + 3}
+
+(Le 3 après le $+$ est bien le nombre décimal et plus le caractère)
+\end{center}
+
+Et puis,
+
+\begin{center}
+\textbf{'A || 23' $\rightarrow$ 'A' + 2$*$16 + 3$*$1}
+
+$=$
+
+\textbf{'A || 23' $\rightarrow$ 'A' + 35}
+\end{center}
+
+On voit qu'il faut stocker le résultat du traitement du caractère et l'additioner
+au résultat du traitement sur une chaine examptée du caractère que l'on vient de
+traiter.
+
+\begin{center}
+\textit{\textbf{Traitement(s, n) = Traitement(s[n], n) + Traitement(s, n-1)}}
+\end{center}
+
+\subsection{Synthèse}
+
+
 
 \section{Spécification}\label{specification}
 %%%%%%%%%%%%%%%%%%%%%%%%%
