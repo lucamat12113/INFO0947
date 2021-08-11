@@ -167,12 +167,25 @@ $=$
 \textbf{'A || 23' $\rightarrow$ 'A' + 35}
 \end{center}
 
-On voit qu'il faut stocker le résultat du traitement du caractère et l'additioner
-au résultat du traitement sur une chaine examptée du caractère que l'on vient de
-traiter.
+On voit qu'il faut transformer le dernier caractère de la chaine et additioner le 
+résultat de cette transformation au produit du facteur 16 (expliquation
+dans le paragraphe suivant) avec le futur résultat du traitement de la chaine de 
+caractères examptée du caractère déjà transformé.
+
+La transformation citée depuis le début de ce rapport ne contient pas les
+puissances de 16 permettant de passer effectivement d'un nombre hexadécimal à un
+nombre décimal. En effet, cette transformation ne faisait qu'allusion à la
+fonction \textit{convert(char hex)} préenregistrée pour nous. C'est pourquoi il 
+est nécessaire de multiplier l'appel récursif par 16. 
+
+De cette façon, les puissances seront toujours respectées étant donné que pour
+atteindre le rang 2 (où nous avons donc 16\up{2}) il y a 2 appels récursifs
+(et 1 appel de base). Nous aurons donc un facteur 16*16 au final pour ce rang, ce qui est correct.
+
+I
 
 \begin{center}
-\textit{\textbf{Traitement(s, n) = Traitement(s[n], n) + Traitement(s, n-1)}}
+\textit{\textbf{Traitement(s, n) = Transfo(s[n-1]) + 16 * Traitement(s, n-1)}}
 \end{center}
 
 
@@ -182,16 +195,21 @@ traiter.
 La formalisation récursive de \textit{Traitement} est donc:
 
 \begin{center}
+
+{\large si n = 0}
+
 \textit{\textbf{Traitement(s, n) =}} 
 
-\textit{\textbf{Transfo(s[0])}} {\large si n = 0}
+\textit{\textbf{Transfo(s[0])}} 
 
 \textit{\textbf{{\large ET}}} 
 
+{\large sinon}
+
 \textit{\textbf{Traitement(s, n) =}} 
 
+\textit{\textbf{Traitement(s, n) = Transfo(s[n-1]) + 16 * Traitement(s, n-1)}} 
 
-\textit{\textbf{Traitement(s[n], n) + Traitement(s, n-1)}} {\large sinon}
 \end{center}
 
 
@@ -231,12 +249,58 @@ hexa_dec_rec(s,n)=(int x)
 
 \section{Construction Récursive}\label{recur}
 
+La structure générale d’une fonction/procédure récursive s’appuie sur une 
+structure conditionnelle. On va donc remplir cette structure en trois étapes : 
+(i) programmation défensive, (ii) cas de base, (iii) cas récursif(s).
 
 \subsection{Programmation défensive}
 
 
 En accord avec les préconditions, nous devons nous assurer que la chaine est
-utilisable et donc que sa longueur n'est pas nulle. Dans le pseudo code 
+utilisable et donc que sa longueur n'est pas nulle. 
+
+\begin{lstlisting}
+hexa_dec_rec(s,n):
+    if( n<=0 )
+        then r<-NULL;
+\end{lstlisting}
+
+Dans ce contexte de Pseudo-Langage théorique, je vérifie mes préconditions à 
+l$'$aide d$'$une structure conditionnelle. Dans le code cette vérification est traduite par un \textit{assert} comme ceci:
+
+\begin{lstlisting}
+unsigned int hexa_dec_rec(char *hexa, int n){
+  assert(hexa!=NULL && n>0);
+\end{lstlisting}
+
+
+\subsection{Cas de base}
+
+
+Si la chaine de caractères n'en contient qu$'$un, on transforme directement ce 
+caractère en son équivalent décimal.
+
+\begin{lstlisting}
+hexa_dec_rec(s,n):
+    // {PréCondition}
+    if (n = 1)
+        then
+        // {int x}
+        r<-transfo(s[n-1];
+        // {PostCondition}
+\end{lstlisting}
+
+\subsection{Cas récursif}
+
+
+On suit la formulation récursive de \textit{Traitement}.
+
+\begin{lstlisting}
+else
+    r<-Traitement(s, n) = Transfo(s[n-1]) + 16 * Traitement(s, n-1
+    // {PostCondition}
+\end{lstlisting}
+
 
 
 \section{Traces d'Exécution}\label{traces}
