@@ -262,7 +262,8 @@ utilisable et donc que sa longueur n'est pas nulle.
 \begin{lstlisting}
 hexa_dec_rec(s,n):
     if( n<=0 )
-        then r<-NULL;
+    then 
+        r<-NULL;
 \end{lstlisting}
 
 Dans ce contexte de Pseudo-Langage théorique, je vérifie mes préconditions à 
@@ -284,7 +285,7 @@ caractère en son équivalent décimal.
 hexa_dec_rec(s,n):
     // {PréCondition}
     if (n = 1)
-        then
+    then
         // {int x}
         r<-transfo(s[n-1];
         // {PostCondition}
@@ -297,70 +298,121 @@ On suit la formulation récursive de \textit{Traitement}.
 
 \begin{lstlisting}
 else
-    r<-Traitement(s, n) = Transfo(s[n-1]) + 16 * Traitement(s, n-1
+    r<-Traitement(s, n) = Transfo(s[n-1]) + 16 * Traitement(s, n-1)
     // {PostCondition}
 \end{lstlisting}
 
 
+\subsection{Code récursif complet}
 
-\section{Traces d'Exécution}\label{traces}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% Fournissez et discutez ici les traces d'exécution de la fonction romain_rec()
-% pour les exemples donnés dans l'énoncé
-%
 
-% L'exemple ci-dessous donne une trace d'exécution pour un exercice sur les
-% Piles (cfr. GameCodes associés).  Inspirez-vous du code LaTeX pour produire
-% vos traces d'exécution.
-% \begin{tabular}{|c|}
-% \\
-% \\
-% \textcolor{white}{--}\\
-% \hline
-% \end{tabular}~~
-% \begin{tabular}{|c|}
-% \\
-% \\
-% 20\\
-% \hline
-% \end{tabular}~~
-% \begin{tabular}{|c|}
-% \\
-% 4\\
-% 20\\
-% \hline
-% \end{tabular}~~
-% \begin{tabular}{|c|}
-% \\
-% \\
-% 80\\
-% \hline
-% \end{tabular}~~
-% \begin{tabular}{|c|}
-% \\
-% 9\\
-% 80\\
-% \hline
-% \end{tabular}~~
-% \begin{tabular}{|c|}
-% 7\\
-% 9\\
-% 80\\
-% \hline
-% \end{tabular}~~
-% \begin{tabular}{|c|}
-% \\
-% 16\\
-% 80\\
-% \hline
-% \end{tabular}~~
-% \begin{tabular}{|c|}
-% \\
-% \\
-% 5\\
-% \hline
-% \end{tabular}
+\begin{lstlisting}
+hexa_dec_rec(s,n):
+    if (n = 1)
+    then
+        r<-transfo(s[n-1];
+    else
+        r<-Traitement(s, n) = Transfo(s[n-1]) + 16 * Traitement(s, n-1)
+\end{lstlisting}
+
+
+\section{Traces d'exécution}\label{traces}
+
+
+Dans cette section nous allons voire les valeurs qui sont stockées sur la pile
+lors de l'exécution de notre fonction. Pour cela nous allons utiliser le même 
+exemple que lors de la formalisation récursive de la fonction: $'$A23$'$.
+\vspace{0.5cm}
+
+\begin{center}
+    
+
+\begin{tabular}{|c|}
+\\
+\\
+3\\
+\hline
+\textbf{1}
+\end{tabular}~~
+\begin{tabular}{|c|}
+\\
+2\\
+3\\
+\hline
+\textbf{2}
+\end{tabular}~~
+\begin{tabular}{|c|}
+10\\
+32\\
+3\\
+\hline
+\textbf{3}
+\end{tabular}~~
+\begin{tabular}{|c|}
+2560\\
+2\\
+3\\
+\hline
+\textbf{4}
+\end{tabular}~~
+\begin{tabular}{|c|}
+\\
+2592\\
+3\\
+\hline
+\textbf{5}
+\end{tabular}~~
+\begin{tabular}{|c|}
+\\
+\\
+2595\\
+\hline
+\textbf{6}
+\end{tabular}~~
+
+\end{center}
+
+Pour une facilité d'explication, se trouvent en dessous de chaque tableau représentant la pile le numéro lui correspondant.
+
+\subsection{Descente récursive}
+
+
+
+\subsection{Tableau 1}
+Appel de la fonction. n > 1 donc on entre dans le cas récursif. Le résultat vaut
+donc 3 qu'on empile.
+
+\subsubsection{Tableau 2}
+2ème appel de la fonction. n > 1 donc on entre dans le cas récursif. Le résultat 
+vaut 2. qu'on empile.
+
+\subsubsection{Tableau 3}
+3ème appel de la fonction. n == 1donc on entre dans le cas de base. Le résultat 
+vaut 10 qu'on empile.
+
+\subsection{Remontée récursive}
+Il est temps de faire les calculs.
+
+\subsubsection{Tableau 4}
+Etant donné qu'il y avait déjà eu 2 appels de la fonction lorsque le caractère
+évalué nous rendait 10 comme résultat, nous devons multiplier ce résultat par 
+16\up{2} ce qui donne 2560.
+
+\subsubsection{Tableau 5}
+N$'$oublions d$'$additionner à ça (2560) l$'$appel précédent qui rendait 2 comme
+résultat mais avant lequel il y avait déjà eu 1 appel de la fonction. Il va donc 
+de soi que nous devons multiplier 2 par 16\up{1} = 32 avant de faire l$'$addition.
+(Multiplication avant addition car PEMDAS!). Nous avons donc maintenant une somme 
+valant 2592.
+
+\subsubsection{Tableau 6}
+Cette fois, il nous faut additionner 2592 avec le premier appel de la fonction qui
+renvoyait 3 comme résultat. Par définition, il n$'$y avait jamais eu d$'$appel de4
+la fonction avant. Il est de ce fait inutile de chercher par quel facteur 3 doit 
+être multiplié. Nous pouvons désormais faire notre dernière addition (2592 + 3), 
+ce qui nous donne 2595 comme résultat final. 2595$_{10}$ équivaut bien à 
+A23$_{16}$.
+
 
 \section{Complexité}\label{complexite}
 %%%%%%%%%%%%%%%%%%%%%
