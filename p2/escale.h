@@ -15,7 +15,7 @@
  * \struct escale
  * \brief Data structure representing a stepover
  */
-typedef struct Escale_t Escale;
+typedef struct Escale_t Escale; 
 
 /**
  * \fn Escale *create(int x, int y, char *name, float time, float dist);

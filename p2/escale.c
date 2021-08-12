@@ -46,7 +46,7 @@ float get_time(Escale *step){
 
     assert(step!=NULL);
 
-    return step->time;
+    return step->time; 
 
 }//end get_time()
 
