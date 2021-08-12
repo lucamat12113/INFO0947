@@ -467,9 +467,9 @@ opérations ainsi que le nombre d’opérations nécessaires par l’appel récu
 c$'$est à dire T(n-1). Il vient le système suivant :
 
 \begin{center}
-    T(n) = a si n=1
+T(n) = a si n=1
     
-    \textcolor{white}{----------------} = b+T(n-1) sinon
+\textcolor{white}{----------------} = b+T(n-1) sinon
 \end{center}
 
 L’élimination de proche en proche consiste à réécrire plusieurs fois cette
@@ -477,19 +477,40 @@ L’élimination de proche en proche consiste à réécrire plusieurs fois cette
 reconnaissable.
 
 \begin{center}
-    T(n) = b+T(n-1)
+T(n) = b+T(n-1)
     
-    \textcolor{white}{----------} = b+b+T(n-2) 
+\textcolor{white}{----------} = b+b+T(n-2) 
     
-    \textcolor{white}{--------} = 3b+T(n-3) 
+\textcolor{white}{--------} = 3b+T(n-3) 
 
-    \textcolor{white}{--------} = 4b+T(n-4) 
+\textcolor{white}{--------} = 4b+T(n-4) 
 
-    \textcolor{white}{---} = ...\textcolor{white}{-------}
+\textcolor{white}{---} = ...\textcolor{white}{-------}
     
-    \textcolor{white}{-----------} = k$\times$b+T(n-k)
+\textcolor{white}{-----------} = k$\times$b+T(n-k)
 
 \end{center}
+
+T (n-k) est une formulation tout à fait générale du temps d’exécution du Kème
+appel récursif. On ne connait qu$'$une valeur particulière de T (.) : T (1) = 0.
+On va donc essayer de faire apparaître cette valeur particulière. On a :
+
+\begin{center}
+n-k=1
+    
+\textcolor{white}{-----}-k=1-n    
+    
+\textcolor{white}{------}k=n-1
+\end{center}
+
+On insère cette valeur dans k $\times$ b + T (n-k), il vient :
+
+\begin{center}
+T (n) = (n-1) $\times$ b + T (1) = (n-1) $\times$ b + a $\in$
+$\mathcal{O}(n)$
+\end{center}
+
+
 
 \section{Dérécursification}\label{derecur}
 
