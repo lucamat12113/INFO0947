@@ -378,7 +378,7 @@ Pour une facilité d'explication, se trouvent en dessous de chaque tableau repr�
 
 
 
-\subsection{Tableau 1}
+\subsubsection{Tableau 1}
 Appel de la fonction. n > 1 donc on entre dans le cas récursif. Le résultat vaut
 donc 3 qu'on empile.
 
@@ -415,20 +415,235 @@ A23$_{16}$.
 
 
 \section{Complexité}\label{complexite}
-%%%%%%%%%%%%%%%%%%%%%
-%
-% Fournissez et discutez ici la complexité théorique de la fonction
-%  hexa_dec_rec()
-%
+
+
+Nous allons, ici, nous charger de déterminer la complexité de notre fonction 
+récursive. Pour cela nous allons éliminer la récurrence de proche en proche.
+
+Le code de notre fonction étant:
+\begin{lstlisting}
+unsigned int hexa_dec_rec(char *hexa, int n){
+  assert(hexa!=NULL && n>0);
+
+  if(n==1)
+    return convert(hexa[n-1]);
+  else
+    return convert(hexa[n-1]) + 16 * hexa_dec_rec(hexa, (n-1));
+}//fin hexa\_dec\_rec()
+\end{lstlisting}
+\vspace{0.5cm}
+
+Nous allons découper ce code en trois pour y voir plus clair:
+
+\begin{center}
+    a:
+\end{center}
+\begin{lstlisting}
+  if(n==1)
+    return convert(hexa[n-1]);
+\end{lstlisting}
+
+\begin{center}
+    b:
+\end{center}
+\begin{lstlisting}
+if(n==1)
+    return convert(hexa[n-1]);
+  else
+    return convert(hexa[n-1]) + 16 * hexa_dec_rec(hexa, (n-1));
+\end{lstlisting}
+
+\begin{center}
+    T(n-1):
+\end{center}
+\begin{lstlisting}
+    return convert(hexa[n-1]) + 16 * hexa_dec_rec(hexa, (n-1));
+\end{lstlisting}
+
+Soit T(n), le coût d$'$un appel à hexa\_dec\_rec(hexa, (n)).
+En ce qui concerne le cas de base, on va dire qu$'$il prend a opérations, a étant
+constant. Pour ce qui est du cas récursif, on va dire qu$'$il demande b
+opérations ainsi que le nombre d’opérations nécessaires par l’appel récursif,
+c$'$est à dire T(n-1). Il vient le système suivant :
+
+\begin{center}
+    T(n) = a si n=1
+    
+    \textcolor{white}{----------------} = b+T(n-1) sinon
+\end{center}
+
+L’élimination de proche en proche consiste à réécrire plusieurs fois cette
+équation en utilisant le cas récursif afin de faire apparaître un motif
+reconnaissable.
+
+\begin{center}
+    T(n) = b+T(n-1)
+    
+    \textcolor{white}{----------} = b+b+T(n-2) 
+    
+    \textcolor{white}{--------} = 3b+T(n-3) 
+
+    \textcolor{white}{--------} = 4b+T(n-4) 
+
+    \textcolor{white}{---} = ...\textcolor{white}{-------}
+    
+    \textcolor{white}{-----------} = k$\times$b+T(n-k)
+
+\end{center}
 
 \section{Dérécursification}\label{derecur}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% Fournissez et discutez ici la dérécursification de la fonction hexa_dec_rec()
-% Attention, il n'est pas question ici de fournir un algorithme itératif mais
-% bien d'éliminer la récursivité comme cela a été vu au cours.
-% La solution doit être proposée en utilisant le pseudo-code vu au cours (et
-% dans les GameCodes du Chapitre 9).
-%
+
+
+\subsection{Introduction du cas général}
+
+
+Notre algorithme n'est pas de récursivité terminale et bien que la multiplication 
+et l$'$addition soient chacune commutative et associative, la combinaison des 
+deux ne l$'$est plus ( (5*3)+2 != 5*(3+2) ). Nous allons donc utiliser le cas
+général de dérécursification vu au cours. Dans ce cas, nous allons simuler la pile
+grâce à un TAD dont voici la sémantique:\vspace{0.5cm}
+
+\noindent Type: 
+    \begin{itemize}
+        \item[$\bullet$] Stack
+    \end{itemize}
+    Utilise: 
+    \begin{itemize}
+        \item[$\bullet$] Boolean, Element
+    \end{itemize}
+    Opérations: 
+    \begin{itemize}
+        \item[$\bullet$] empty\_stack: $stack \rightarrow stack$
+        \item[$\bullet$] is\_empty: $stack \rightarrow boolean$
+        \item[$\bullet$] push: $stack \times element \rightarrow stack$
+        \item[$\bullet$] pop: $stack \rightarrow stack$
+        \item[$\bullet$] top: $stack \rightarrow element$
+    \end{itemize}
+    Précondtions:
+    \begin{itemize}
+        \item[$\bullet$] pop(s) is defined iff is\_empty(s) = False
+        \item[$\bullet$] top(s) is defined iff is\_empty(s) = False
+    \end{itemize}
+    Axiomes: 
+    \begin{itemize}
+        \item[$\bullet$] is\_empty(empty\_stack) = True
+        \item[$\bullet$] is\_empty(push(s, e)) = False
+        \item[$\bullet$] pop(push(s, e)) = s
+        \item[$\bullet$] top(push(s, e)) = e
+    \end{itemize}
+
+\subsection{Algorithme de transformation}
+
+La conversion de la fonction récursive en itérative sera constituée d’une boucle
+qui ne s’arrêtera que quand la Pile sera vide. Au début de chaque itération, on
+dépile un contexte et on exécute les opérations en fonction de la valeur de pc. Ce
+qui donne le code suivant :
+
+\begin{lstlisting}
+f (int x):
+    // Il faut évidemment déclarer et initialiser une Pile vide.
+    s <- empty_stack ();
+
+    // On place sur la Pile le premier appel de la fonction, forcément, pc = 1 :
+    s <- push(s, (x, 1));
+
+    until is_empty(s) do
+        // On dépile le premier contexte sur la pile
+        (x, pc) <- top(s);
+        s <- pop(s);
+
+        // On choisit sur base de pc les opérations à effectuer:
+        if (pc = 1)
+            then
+                if (cond(x))
+                    then
+                        r <- base(x);
+                    else
+                    /* Avant l appel récursif, on se souvient qu il faudra
+                    continuer dans le bloc
+                    */
+                    s <- push(s, (x, 2))
+                    // On empile ensuite l’appel récursif
+                    s <- push(s, (progression(x), 1))
+            else // pc = 2, donc
+                // On récupère la dernière valeur de retour
+                tmp <- r ;
+                // On retourne le résultat calculé
+                r <- operation(tmp , x);
+end
+
+// la variable r contient donc la valeur finale
+\end{lstlisting}
+
+On considère que pc = 1 quand on entre dans la fonction et pc = 2 au retour de
+l’appel récursif.
+
+
+\subsection{Transformation du code en un code générique récursif}
+
+\begin{center}
+    Code récursif:
+\end{center}
+\begin{lstlisting}
+hexa_dec_rec(s,n):
+    if (n = 1)
+    then
+        r<-transfo(s[n-1];
+    else
+        r<-Traitement(s, n) = Transfo(s[n-1]) + 16 * Traitement(s, n-1)
+\end{lstlisting}
+
+\begin{center}
+    Code récursif générique:
+\end{center}
+\begin{lstlisting}
+f(s,n):
+    if (cond(n))
+    then
+        r<-g(s);
+    else
+        r<-G(s, f(s,n);
+\end{lstlisting}
+
+\begin{center}
+    Code itératif générique:
+\end{center}
+\begin{lstlisting}
+f_derec(s, n):
+    p <- empty_stack();
+    a <- 0;
+    b <- s;
+    until cond(a) do
+        p <- push(p, b[a]);
+        a <- h(a);
+    end
+    until is_empty(p) do
+        b <- top(p);
+        p <- pop(p);
+        r <- G(s, r);
+    end
+\end{lstlisting}
+
+\begin{center}
+    Code itératif final:
+\end{center}
+\begin{lstlisting}
+hexa_dec_rec_derec(s, n):
+    p <- empty_stack();
+    a <- 0;
+    b <- s;
+    until a = n do
+        p <- push(p, b[a]);
+        a <- a+1;
+    end
+    until is_empty(p) do
+        b <- top(p);
+        p <- pop(p);
+        r <- transfo(b) + 16 * r ;
+    end
+\end{lstlisting}
+
+
+
 
 \end{document}
