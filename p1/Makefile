@@ -1,16 +1,9 @@
-CC=gcc
-LD=gcc
-CFLAGS=--std=c99 --pedantic -Wall -W -Wmissing-prototypes
-LDFLAGS=
-EXEC=output
+include Makefile.compilation
 
-all:$(EXEC)
+all:
+	cd Code; make all
+	cd Rapport; make all
 
-output: main.o multiplicite.o
-	$(LD) -o output main.o multiplicite.o $(LDFLAGS)
-
-main.o: main.c
-	$(CC) -c main.c -o main.o $(CFLAGS)
-
-multiplicite.o: multiplicite.c multiplicite.h
-	$(CC) -c multiplicite.c -o multiplicite.o $(CFLAGS)
+clean:
+	cd Code; make clean
+	cd Rapport; make clean
