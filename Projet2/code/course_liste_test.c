@@ -9,7 +9,7 @@
 
 
 #include "seatest.h"
-#include"course.h"
+#include "course.h"
 
 static void test_best_time_race(){
 
@@ -20,6 +20,6 @@ static void test_best_time_race(){
     set_time(step1, 5.346);
     set_time(step2, 12.447);
 
-    
+
 
 }
