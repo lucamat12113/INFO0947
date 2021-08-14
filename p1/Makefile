@@ -1,9 +1,9 @@
 include Makefile.compilation
 
 all:
-	cd Code; make all
-	cd Rapport; make all
+	cd code; make all
+	cd rapport; make all
 
 clean:
-	cd Code; make clean
-	cd Rapport; make clean
+	cd code; make clean
+	cd rapport; make clean
