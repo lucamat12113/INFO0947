@@ -72,14 +72,14 @@
 
 %%%%%%%%%%%%%%%%% TITRE %%%%%%%%%%%%%%%%
 % Complétez et décommentez les définitions de macros suivantes :
-% \newcommand{\intitule}{Le titre du travail}
-% \newcommand{\GrNbr}{1742}
-% \newcommand{\PrenomUN}{Galileo}
-% \newcommand{\NomUN}{Galilei}
+\newcommand{\intitule}{Récursivité et ypes abstraits de données}
+\newcommand{\GrNbr}{s190632}
+\newcommand{\PrenomUN}{Luca}
+\newcommand{\NomUN}{Matagne}
 % \newcommand{\PrenomDEUX}{Octave}
 % \newcommand{\NomDEUX}{Urbain}
 % Décommentez ceci si vous voulez une table des matières :
-% \renewcommand{\tablemat}{\tableofcontents}
+\renewcommand{\tablemat}{\tableofcontents}
 
 %%%%%%%% ZONE PROTÉGÉE : MODIFIEZ UNE DES DIX PROCHAINES %%%%%%%%
 %%%%%%%%            LIGNES POUR PERDRE 2 PTS.            %%%%%%%%
@@ -94,66 +94,610 @@
 %%%%%%%%%%%%%%%%%%%% FIN DE LA ZONE PROTÉGÉE %%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%% RAPPORT %%%%%%%%%%%%%%%
-% Écrivez votre rapport ci-dessous.
+\section{Signature et sémantique des TAD}
+\subsection{Escale}
 
-\section{Insérer du code Latex}
+\noindent Type: 
+    \begin{itemize}
+        \item[$\bullet$] Escale
+    \end{itemize}
+    Utilise: 
+    \begin{itemize}
+        \item[$\bullet$] float
+        \item[$\bullet$] char
+    \end{itemize}
+    Opérations: 
+    \begin{itemize}
+        \item[$\bullet$] creation: $float \times float \times char \rightarrow Escale$
+        \item[$\bullet$] set\_time: $Escale \times float \rightarrow Escale$
+        \item[$\bullet$] get\_time: $Escale \rightarrow float$
+        \item[$\bullet$] get: $Escale \rightarrow Escale$
+        \item[$\bullet$] calc\_distance: $Escale \times Escale \rightarrow float$
+    \end{itemize}
+    Précondtions:
+    \begin{itemize}
+        \item[$\bullet$] str $\ne$ NULL
+    \end{itemize}
+    Axiomes: $ \forall A, B \in Escale \land \forall x,y \in Real\up{+} \land str \in char $
+    \begin{itemize}
+        \item[$\bullet$] get\_time(set\_time(A, x)) = $x$
+        \item[$\bullet$] get(creation(x, y, str)) = $x, y, str$
+        \item[$\bullet$] calc\_distance(A, B) = $\arccos{sin(B \rightarrow x) * sin(A \rightarrow x) + cos(B \rightarrow x) * cos(A \rightarrow x)}$
+    \end{itemize}
 
-\begin{lstlisting}[caption={Un programme tout simple}]
-int main(void)
-{
-	// Les commandes Latex sont permises dans les commentaires sur une ligne. Exemple : $x_i \leq a ^b$
-	printf("Bonjour tout le monde !");
-	/*
-	Dans les commentaires sur plusieurs lignes, elles doivent être entourées
-	de symboles définis par l'option « escapeinside » de \lstset
-	(>\coms{$\sum_{i = 1}^N 1 = N$}<)
-	La commande « \coms » permet de colorer correctement le code latex ajouté.
-	Les accents et tous les autres diacritiques sont permis : àÀçÇéÉèÈêÊœŒ...
-	*/
-	return 1; (>\label{code:ret}<)
+
+\subsection{Course}
+
+\noindent Type: 
+    \begin{itemize}
+        \item[$\bullet$] Course
+    \end{itemize}
+    Utilise: 
+    \begin{itemize}
+        \item[$\bullet$] Escale
+        \item[$\bullet$] Course
+        \item[$\bullet$] int
+        \item[$\bullet$] char
+        \item[$\bullet$] float
+    \end{itemize}
+    Opérations: 
+    \begin{itemize}
+        \item[$\bullet$] create: $Escale \times Escale \rightarrow Course$
+        \item[$\bullet$] is\_a\_loop: $Course \rightarrow char$
+        \item[$\bullet$] how\_many\_escale: $Course \rightarrow int$
+        \item[$\bullet$] how\_many\_step: $Course \rightarrow int$
+        \item[$\bullet$] best\_time\_race: $Course \rightarrow float$
+        \item[$\bullet$] best\_time\_step: $Course \times Escalee \rightarrow float$
+        \item[$\bullet$] add\_step: $Course \times int \times Escale \rightarrow Course$
+        \item[$\bullet$] remove\_step: $Course \times int \rightarrow Course$
+    \end{itemize}
+    Précondtions:
+        $\forall A, B \in Escale \land \forall i \in Real$ 
+        \begin{itemize}
+            \item[$\bullet$] create(A, B) is defined iff $A \ne NULL \land B \ne NULL$
+            \item[$\bullet$] add\_step( A, i) is defined iff $0 \leq i$
+            \item[$\bullet$] remove\_step(A, i) is defined iff $0 \leq i$ 
+        \end{itemize}
+    Axiomes: $\forall A, B, C \in Escale \land \forall i \in Real\land \forall X \in Course$
+    \begin{itemize}
+        \item[$\bullet$] best\_time\_race(create(A, B)) = best\_time\_step(A) + best\_time\_step(B)
+        \item[$\bullet$] remove\_step(add\_step(X, i, A), A) = X
+        \item[$\bullet$] add\_step(remove\_step(X, A), i, A) = X
+        \item[$\bullet$] how\_many\_escale(create(A, B)) = 2
+        \item[$\bullet$] how\_many\_escale(add\_step(X, i, A)) = how\_many\_escale(X) + 1
+        \item[$\bullet$] how\_many\_escale(remove\_step(X, i, A)) = how\_many\_escale(X) - 1
+        \item[$\bullet$] how\_many\_step(create(A, B)) = how\_many\_escale(create(A, B)) - 1
+        \item[$\bullet$] is\_a\_loop(add\_step(create(A, B), 2, A)) = 'oui'
+    \end{itemize}
+
+\section{TAD Escale}
+
+\subsection{Spécifications des fonctions et procédures}
+
+\begin{lstlisting}
+/* 
+ * @pre: x != NULL,  y != NULL, name != NULL
+ * @post: get(creation) = step=(name, x, y) 
+ * 
+ */
+Escale *creation(float x, float y, char *name);
+/* 
+ * @pre: step != NULL, time != NULL}
+ * @post: step=(x, y, name, time)
+ */
+Escale *set_time(Escale *step, float time);
+/* 
+ * @pre: step != NULL
+ * @post: get_time=time
+ */
+float get_time(Escale *step);
+/* 
+ * @pre: step != NULL
+ * @post: get(step) = step
+ */
+Escale *get(Escale *step);
+/* 
+ * @pre: step_depart != NULL, step != NULL 
+ * @post: distance = acos((sin(step_depart->x)*sin(step->x))+(cos(step_depart->y)*cos(step->y)));
+    step->distance =arccos * 6371
+ */
+float calc_distance(Escale *step_depart, Escale *step);
+\end{lstlisting}
+
+\subsection{Structure}
+
+Une escale est composée de ses coordonnées et de son nom (donnés à la création) mais elle peut aussi contenir, par ajour ultérieur, un meilleur temps et la distance avec l'étape précdente :
+\begin{lstlisting}
+struct Escale_t {
+
+    float x;
+    float y;
+    float time;
+    char *name;
+    float distance;
+};
+\end{lstlisting}
+
+\subsection{Gestion de la structure}
+L'implémentation des fonctions et procédures permettant la gestion de ce TAD est très simple puisque nous ne sommes principalement amenés qu'à appliquer des opérations mathématiques ou effectuer un simple retour de champ. Elle ne sera donc pas détaillée dans le rapport. Sa complexité étant égale à O(1) ne sera également pas décrite.
+
+\section{TAD Polyline}
+\subsection{Spécifications des fonctions et procédures}
+\begin{lstlisting}
+/* 
+ * @pre: /
+ * @post: (get_x(create_Point2D) = x 
+ * 
+ */
+Course *create(Escale *step1, Escale *step2);
+/* 
+ * @pre: \color{blue}{A != NULL $\land$ B != NULL}
+ * @post: \color{blue}{$A=T_{(A, B)} \land B=B_0$}
+ */
+char *is_a_loop(Course *race);
+/* 
+ * @pre: \color{blue}{A != NULL $\land$ B != NULL}
+ * @post: \color{blue}{$A=R_{(A, B), alpha} \land B=B_0 \land alpha = alpha_0$}
+ */
+int how_many_escale(Course *race);
+/* 
+ * @pre: A != NULL
+ * @post: A = NULL
+ */
+int how_many_step(Course *race);
+/* 
+ * @pre: A != NULL
+ * @post: \color{blue}{A=A$_0$ $\land$} get_x = x
+ */
+float best_time_race(Course *race);
+/* 
+ * @pre: A != NULL
+ * @post: \color{blue}{A=A$_0 \land$} get_y = y
+ */
+float best_time_step(Course *race, Escale *step);
+/* 
+ * @pre: A != NULL \color{blue}{$\land $} B != NULL
+ * @post: \color{blue}{A=A$_0$ $\land$ B=B$_0$ $\land $} distance = |AB|
+ */
+Course *add_step(Course *race, int i, Escale *newStep);
+/* 
+ * @pre: A != NULL \color{blue}{$\land $} B != NULL
+ * @post: \color{blue}{A=A$_0$ $\land$ B=B$_0$ $\land $} distance = |AB|
+ */
+ Course *remove_step(Course *race, int i);
+\end{lstlisting}
+
+\subsection{Structure en tableau}
+
+\subsubsection{Présentation}\label{presentation}
+Cette première  structure représente une polyligne dont la suite de points qui la composent est contenue dans un tableau de taille arraySize. En plus de ce tableau de points, on retrouve les différentes caractéristiques d'une polyligne, à savoir sa taille, sa longueur\footnote{on a choisi de stocker la longueur dans la structure pour faciliter son accès (mais surtout eviter de parcourir l'entièreté du tableau pour la calculer), elle sera donc mise à jour régulièrement. Pour simplifier cette mise à jour, cette variable contiendra toujours la longueur de la polyligne en tant que polyligne fermée} et si celle-ci est fermée. On a donc:
+\begin{lstlisting}
+struct Polyline{
+	char isClosed;
+	unsigned size;
+	float get\_length;
+	unsigned arraySize;
+	2DPoint** pointArray;
+};
+\end{lstlisting}
+
+\subsubsection{Gestion de la structure en tableau}
+L'accès aux données dans un tableau étant arbitraire et la présence des champs size et length, l'implémentation des fonctions d'observations (c'est-à-dire get\_size, get\_length et get\_Point2D) est triviale. En effet il suffit de vérifier les préconditions avant de retourner le champ correspondant. Quant aux les opérations internes, à l'exception du constructeur\footnote{La création d'une polyligne se fait à partir de deux points, avec cette restriction, un tableau de taille 2 est suffisant à l'initialisation, cependant dans l'implémentation nous avons décidé d'initialiser la taille du tableau à 20 car on suppose que l'utilisateur voudra manipuler plus d'une ligne s'il utilise le TAD polyligne.} et des procédures permettant d'ouvrir ou fermer la polyligne, on est confrontés à des manipulations des données d'un tableau ce qui implique la présence de boucle et donc d'invariants. Seuls get\_length, add\_Point2D et translate\_Polyligne seront détaillées dans cette partie.
+
+\subsubsection{Schématisation}
+
+\includegraphics[height=3cm, width=16cm]{array.png}
+
+\subsubsection{Implémentation}
+
+\paragraph{Calculer la longueur} \label{length}
+
+Cette fonction ne fait que retourner le champ length dans notre structure. Celui-ci contient la longueur de la polyligne fermée. Lors du retour il faut dont vérifier s'il s'agit bien d'une polyligne fermée, dans le cas contraire il faut soustraire la distance entre le premier et dernier point de la polyligne. Cette opération est triviale puisque notre structure contient une cellule d'en tête qui permet un accès directe au premier point. De plus, la liste étant circulaire et doublement chainée, l'accès au dernier point à partir du premier est direct.
+Ce champ doit cependant être mis à jour lors de l'invocation de la procédure remove\_Point2D ou add\_Point2D. La longueur d'un segment de droite sera remplacée par deux nouveaux dans le cas d'un ajout et deux segments de droite seront remplacés par un nouveau dans le cas d'un retrait.
+\begin{wrapfigure}{r}{0.40\textwidth}
+    \centering
+    \includegraphics[width=0.20\textwidth]{length.png}
+\end{wrapfigure}
+Prenons l'exemple de la polyligne ci-contre, si l'on ajoute le point A' à la position 2 A$_0$A$_1$A$_2$, sa nouvelle longueur sera égale à la précédente moins |A$_1$A$_2$| plus |A$_1$A'| et |A'A$_2$|.
+
+\paragraph{Ajouter un point}
+
+Il y a plusieurs aspects à prendre en considération:
+\begin{enumerate}
+    \item réallouer de la mémoire pour le tableau si celui-ci est actuellement rempli c'est-à-dire lorsque size vaut arraySize. (faire appel à realloc)\footnote{Pour éviter des appels excessif à cette fonction, la taille du tableau sera multipliée par deux et non incrémentée de 1.}
+    \item décaler tous les points dans le tableau vers la droite à partir de l'emplacement
+    \item insérer le nouveau point à l'emplacement donné
+    \item mettre à jour la taille (incrémenter size de 1)
+    \item mettre à jour la longueur (soustraire la longueur du segment formé entre le point précédent le nouveau et son suivant pour ensuite ajouter les deux nouveaux segments formés)
+\end{enumerate}
+Les points 1, 3 et 4 étant simples, seul le point 2 sera considérer comme un sous problème inclus notre sous problème 1 qui est notre procédure. On a donc $SP2 \subset SP1$
+
+\noindent \textbf{Analyse du SP2:}
+
+L'objectif de ce sous problème est de décaler tous les éléments d'un tableau d'une case vers la droite. Soit T un tableau de taille n, on a:
+
+\begin{lstlisting}[escapechar=]
+/* 
+ * SP2
+ * @pre: \color{blue}{$Tinit$ $\land$ $0 \leq start < n$}
+ * @post: \color{blue}{$n = n_0$ $\land$ $start=start_0$ $\land$ $\forall i, start < i < n,$ $T[i] = T[i-1]_0$ $\land$} 
+ * \color{blue}{$\forall i, 0 \leq i \leq start,$ $T[i] = T[i]_0$}
+ */
+void shift_right(2DPoint** T, unsigned n, unsigned start);
+\end{lstlisting}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|llcl|lllllllllllll|}
+\hline
+\multicolumn{1}{|c}{} &  & Description &  &  &  & \multicolumn{10}{c}{Invariant} &  \\ \hline
+\multicolumn{1}{|c}{} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  &  &  & \multicolumn{1}{l|}{} & 0 &  &  &  &  &  &  & \multicolumn{1}{l|}{} & n &  \\
+ &  &  &  &  &  & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & start &  & \multicolumn{1}{r|}{i} &  &  &  & \multicolumn{1}{l|}{} &  &  \\
+ &  &  &  &  &  & \multicolumn{1}{l|}{T:} & \multicolumn{1}{l|}{} & \multicolumn{3}{c|}{\cellcolor[HTML]{CBCEFB}.à décaler} & \multicolumn{4}{c|}{\cellcolor[HTML]{BAF0CC}.déjà décalé} &  &  \\ \cline{8-15}
+ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  & \multirow{-6}{*}{\begin{tabular}[c]{@{}c@{}}Tous les éléments de {]}i, n{[}\\  ont déjà étés décalé d'une case\\ vers la droite. Puisque i\\ est compris entre n non\\ inclus et start inclus, à \\ l'initialisation on a\\ i = n - 1 et i = start à\\  la fin (condition d'arrêt)\\ d'où le gardien i\textgreater{}start\end{tabular}} &  &  &  &  & \multicolumn{8}{c}{\begin{tabular}[c]{@{}c@{}} $\forall j, i < j < n, $\\ $T[j] = T[j-1]_0 $\\ $\land \forall j, 0\leq j \leq i, T[j] = T[j]_0 \land n = n_0$\\ $\land start = start_0 \land 0\leq start\leq i< n$\end{tabular}} &  &  \\
+ &  & \multicolumn{1}{l}{} &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  & \multicolumn{1}{l}{} &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+\end{tabular}
+\end{table}
+
+\noindent \textbf{Résolution du SP2:}
+\begin{lstlisting}
+//preconditions
+unsigned i = n - 1;
+while(i>start){
+    T[i] = T[i-1];
+    i--;
 }
 \end{lstlisting}
 
-Il est possible de faire référence à la ligne \ref{code:ret} de l'extrait de code.
+\paragraph{Appliquer une translation}\label{trans}
+Cette manipulation modifie les coordonnées des points de la polyligne. Puisque ceux-ci sont soumis à la même translation, la longueur de la polyligne reste inchangée. Il est aussi évident que size et isClosed restent identiques. Il suffit donc d'appliquer une translation sur chacun des points. Pour ce, on doit parcourir les size premières cases du tableau.
 
-\section{Dessiner un tableau}
-
-Comme mentionné sur le forum «~\emph{eCampus > Forum : Projets -- Informations générales > Thème : Dessine-moi un invariant !}~», il est possible de dessiner facilement des tableaux. Le résultat de l'exemple donné sur le forum eCampus est visible dans la figure \ref{fig:exemple}.
-
-\begin{figure}[!h]
+\begin{table}[h]
 \centering
-\begin{tabular}{l|llr|ll|l}
- & 0 &  & \multicolumn{1}{r|}{i-1} & i &  & N \\ \cline{2-6}
-t: & \cellcolor[HTML]{FFCC67} & \cellcolor[HTML]{FFCC67}. > 0 & \cellcolor[HTML]{FFCC67} &  &  &  \\ \cline{2-6}
-\end{tabular}
-\caption{Voici le tableau de l'exemple}
-\label{fig:exemple}
-\end{figure}
-
-\section{Autres conseils}
-
-\subsection{Utilisez les bons opérateurs}
-
-Voir la table \ref{table:op}.
-
-\begin{table}[!h]
-\centering
-\begin{tabular}{l c}
-Nom & Op \\
+\begin{tabular}{|llcl|lllllllllllll|}
 \hline
-ET & $\land$ \\
-OU & $\lor$ \\
-Quantification universelle & $\forall$ \\
-Quantification existentielle & $\exists$ \\
+\multicolumn{1}{|c}{} &  & Description &  &  &  & \multicolumn{10}{c}{Invariant} &  \\ \hline
+\multicolumn{1}{|c}{} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  &  &  & \multicolumn{1}{l|}{} & 0 &  &  &  &  &  &  & \multicolumn{1}{l|}{} & P->size &  \\
+ &  &  &  &  &  & \multicolumn{1}{l|}{} &  &  &  & \multicolumn{1}{l|}{} & i &  &  & \multicolumn{1}{l|}{} &  &  \\
+ &  &  &  &  &  & \multicolumn{1}{l|}{T:} & \multicolumn{4}{c|}{\cellcolor[HTML]{BAF0CC}.déjà translatés} & \multicolumn{4}{c|}{\cellcolor[HTML]{CBCEFB}.à translater} &  &  \\ \cline{8-15}
+ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  & \multirow{-6}{*}{\begin{tabular}[c]{@{}c@{}}Tous les points de {[}0, i{[}\\  ont déjà subi une translation\\ de B. Vu le schèma, i "se \\ balade" entre 0 et P->size inclus.\\ On a donc i = 0 à l'initia-\\ lisation et i =  P->size à son \\ maxium (condition d'arrêt)\\ d'où le gardien i<P->size\end{tabular}} &  &  &  &  & \multicolumn{8}{c}{\begin{tabular}[c]{@{}c@{}}$P->size = P->size_0\land$ \\ $0\leq i\leq  P->size$ $\land$ \\ $\forall j, 0 \leq j < i, $\\$ P->pointArray[j] = T_{(P->pointArray[j]_0, B)} $\end{tabular}} &  &  \\
+ &  & \multicolumn{1}{l}{} &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
 \end{tabular}
-\caption{Opérateurs les plus usuels en logique}
-\label{table:op}
 \end{table}
 
-\subsection{Trouver un symbole précis}
+\subsection{Structure basée sur une liste chaînée}
 
-Voir ce site : \url{http://detexify.kirelabs.org/classify.html}. Il suffit de dessiner le symbole dont vous avez besoin et le site trouvera (normalement) la bonne commande à taper (ainsi que le package à éventuellement inclure si besoin est).
+Cette structure représente une polyligne dont la suite de points est stockée dans une liste doublement chainée circulaire avec une cellule en tête de liste. Hormis la cellule d'en tête qui remplace le champ pointArray, le reste de la structure est identique à la précédente. Quant à la liste, puisqu'elle est doublement chainée, chaque cellule contient en plus d'un point, un pointeur vers la cellule précédente et suivante.
 
-\subsection{N'oubliez pas de relire le résultat produit par la compilation}
+\begin{lstlisting}
+struct pointList{
+	2DPoint* point;
+	pointList* next;
+	pointList* previous;
+};
+struct Polyline{
+	char isClosed;
+	unsigned size;
+	float length;
+	pointList* head;
+};
+\end{lstlisting}
+
+\subsection{Gestion de la structure en liste chainée}
+
+Puisque nous avons fait le choix de stocké la longueur\footnote{Encore une fois, ce champ représentera toujours la longueur de la polyligne en supposant qu'elle est fermée} ainsi que la taille de la polyligne dans notre structure, l'implémentation des fonctions d'observation est identique à celle d'une polyligne ordonnée en tableau. La dernière fonction d'observation, à savoir get\_Point2D est cependant un peu plus subtile. En effet puisqu'il s'agit de liste le parcours des éléments est séquentiel, il est donc impossible de renvoyer le point de l'emplacement demandé sans parcourir  ceux qui le précèdent. Il en est de même pour les opérations internes (sauf à nouveau, celles qui ne font que modifier le champ isClosed). Pour cette structure, nous devons détailler les fonctions get\_length, remove\_Point2D et add\_Point2D\footnote{cette troisième procédure est choisie car elle contribue à la manipulation du champ length qui permet d'obtenir la longueur d'une polyligne}. La fonction get\_length ne sera cependant pas détaillée car elle est identique à celle implémentée pour une structure ordonnée en tableau. (voir \ref{length})
+
+\subsubsection{Schématisation}
+
+\includegraphics[height=7cm, width=12cm]{list.png}
+
+\subsubsection{Implémentation}
+
+\paragraph{Ajouter un point}
+Notre structure contient une cellule d'en tête vers la liste circulaire doublement chainée contenant des points (au moins 2). Lors de l'invocation de notre fonction nous avons donc accès à la première cellule de la liste. Pour ajouter un nouvel élément à la position courante (0), il faut:
+\begin{enumerate}
+    \item mettre l'adresse de l'élément courant dans le champ next du nouvel élément.
+    \item égaliser le champ previous du nouvel élément au champ previous de l'élément courant.
+    \item mettre l'adresse du nouvel élément dans le champ next de l'élément précèdent.
+    \item mettre l'adresse du nouvel élément dans le champ previous de l'élément courant.
+\end{enumerate}
+On a donc:
+
+\includegraphics[height=3cm, width=16cm]{add1.png}
+\includegraphics[height=3cm, width=16cm]{add3.png}
+Ces quatre étapes combinées à une mise à jour du pointeur vers la première cellule reviennent à effectuer l'ajout d'un point en première position. Or, cette fonction doit pouvoir ajouter un point à n'importe quel emplacement donné. En isolant, la mise à jour du pointeur vers la première cellule, on peut généraliser notre problème et essayer de rapprocher la valeur de cet emplacement à 0. Supposons que les quatre première étapes définissent add(cell, newCell, 0). Dès lors:
+\begin{itemize}
+    \item notre paramètre récursif est l'emplacement
+    \item on peut résoudre le problème lorsque sa valeur vaut 0
+    \item pour se rapprocher de cette valeur il suffit d'avancer dans la liste
+\end{itemize}
+On peut donc formuler le problème de la manière suivante:\\
+$
+\begin{array}{ll}
+add(cell, newCell, position) 
+&=\left\{
+    \begin{array}{ll}
+        add(cell, newCell, 0) & \mbox{if } position = 0 \\
+        add(cell->next, newCell, position - 1) & \mbox{else}
+    \end{array}
+\right.
+\end{array}$ 
+
+En décrémentant la variable position, qui est supérieure ou égale à 0, on peut être sûrs d'atteindre notre cas de base. On remarque aussi qu'il est nécessaire de faire appel à une autre procédure qui prend en paramètre l'adresse de la cellule d'en tête de notre liste et non celle de la polyligne. Après l'invocation de cette procédure la valeur contenue dans le champ head sera modifiée si la valeur de la position entrée en argument à la fonction add\_Point2D était initialement 0.
+
+Notons que c'est notre procédure récursive qui mettra à jour le champ length puisque c'est lors de l'ajout de l'élément que nous aurons accès aux points adjacents du nouveau point à ajouter. Elle prendra donc un troisième argument qui est l'adresse du champ length pour pouvoir modifier sa valeur.  Nous penserons également à incrémenter de 1 la taille de notre polyligne (qui rappelons est stockée dans le champ size) avant de faire appel à cette procédure.
+
+
+\paragraph{Retirer un point}
+
+Encore une fois, à l'invocation de notre procédure, nous avons accès à la première cellule de la liste (position 0). Pour retirer cette première cellule il faut:
+\begin{enumerate}
+    \item égaliser le champ next de l'élément précédent au champ next de l'élément courant.
+    \item égaliser le champ previous de l'élément suivant au champ previous de l'élément courant.
+    \item isoler l'élément courant.
+    \item détruire l'élément courant.
+\end{enumerate}
+
+\includegraphics[height=3cm, width=16cm]{remove.png}
+\includegraphics[height=3cm, width=16cm]{remove1.png}
+
+En plus de ces manipulations, il faut mettre à jour la valeur du champ head. En effet si notre premier point est supprimé, il est impératif de l'égaliser à l'adresse de la cellule suivante. Supposons encore une fois que les quatre premières étapes définissent remove(cell, 0). On a:
+
+\begin{enumerate}
+    \item notre paramètre récursif: l'emplacement
+    \item on peut résoudre le problème lorsque celui-ci vaut 0
+    \item pour se rapprocher de cette valeur il suffit d'avancer dans la liste
+\end{enumerate}
+
+On peut donc formuler le problème de la manière suivante:\\
+$
+\begin{array}{ll}
+remove(cell, position) 
+&=\left\{
+    \begin{array}{ll}
+        remove(cell, 0)& \mbox{if } position = 0 \\
+        remove(cell->next, position - 1) & \mbox{else}
+    \end{array}
+\right.
+\end{array}$ \\
+En décrémentant la variable position, qui est supérieure ou égale à 0, on peut être sûrs d'atteindre notre cas de base. Il est à nouveau nécessaire de faire appel à une fonction récursive prenant en paramètre l'adresse de la cellule d'en tête en non celle de la polyligne. De plus nous garderons la valeur du champ next du point à retirer dans une variable tampon qui sera la valeur de retour de cette fonction récursive. Ceci nous permettra de mettre à jour le champ head par la suite si le point retiré se trouvais à la première position.
+
+La mise à jour du champ length sera éffectuée au sein de la procédure récursive. Celle-ci prendra donc un troisième argument qui est l'adresse où se trouve la longueur de la polyligne.
+
+\section{Complexité}
+
+\subsection{Polyline}
+
+Les trois procédures create\_Polyline, open\_Polyline, close\_Polyline ainsi que les observateurs, à l'exception de get\_Point2D, sont constantes car le nombre d'opérations de varient pas en fonction d'un variable quelconque. La complexité est donc O(1). Dans le cas de la structure en tableau get\_Point2D est également de complexité constante, la complexité de cette fonction ne sera donc analyser que pour la structure en liste.
+
+\subsubsection{PolylineArray}
+\paragraph{add\_Point2D}
+
+Soient a, le nombre d'opérations dans les if, b, le nombre d'opérations en dehors de celui-ci et c, le nombre d'opérations dans shift\_rigth.
+
+\noindent a et b ont une complexité constante car le nombre d'opération ne varie pas.
+
+Évaluons la complexité de shift\_right:\\
+Nous savons que dans le pire des cas start vaut 0 (vu les pré-conditions). Soit d, le nombre d'opérations dans la boucle, 
+
+$$
+\begin{array}{ll}
+T(n) 
+&= \displaystyle \sum_{start+1}^{n-1}d\\
+&= \displaystyle \sum_{1}^{n-1}d \text{\indent(car start vaut 0 dans le pire des cas)}\\
+&= (n-2)*d \\
+\end{array}
+$$
+
+Remplaçons c:
+$$
+\begin{array}{ll}
+T(P->size) 
+&= a + b + c\\
+&= 1 + 1 + (P->size-1)*d \text{\indent(comme P->size + 1 = n)}\\
+&= 1 + (P->size-1) \text{\indent(car d est de complexité linéaire)}\\
+&\implies O(P->size)\\
+\end{array}
+$$
+
+La fonction est donc linéaire.
+
+\paragraph{remove\_Point2D}
+
+Soient a, le nombre d'opérations dans les if; b, le nombre d'opérations en dehors de celui-ci et c, le nombre d'opérations dans shift\_left.
+
+\noindent a et b ont une complexité constante car le nombre d'opération ne varie pas.
+
+Évaluons la complexité de shift\_left:\\
+Nous savons que dans le pire des cas start vaut 0 (vu les pré-conditions). Soit d, le nombre d'opérations dans la boucle:
+$$
+\begin{array}{ll}
+T(n)
+&= \displaystyle \sum_{start}^{n-1}d\\
+&= \displaystyle \sum_0^{n-1}d \text{\indent(car start dans le pire des cas vaut 0)}\\
+&= (n-1)*d\\
+\end{array}
+$$
+Remplaçons c:
+$$
+\begin{array}{ll}
+T(P->size) 
+&= a + b + c\\
+&= 1 + 1 + (P->size-1)*d   \text{\indent(comme P->size = n)} \\
+&= 1 + (P->size-1)  \text{\indent(car d est de complexité linéaire)} \\
+&\implies O(P->size)\\
+\end{array}
+$$
+La fonction est donc linéaire.
+
+\paragraph{translate\_Polyline / rotate\_Polyline}
+
+Les 2 fonctions ont globalement la même structure donc nous allons traiter la complexité des 2 en même temps.
+
+Soient a, le nombre d'opérations en dehors de la boucle et b, le nombre d'opérations dans la boucle.
+
+a et b ne varient pas en fonction d'une variable donc leur complexité est linéaire.
+$$
+\begin{array}{ll}
+T(P->size) 
+&= a + \displaystyle \sum_{i=0}^{P->size-1}b\\
+&= 1 + (P->size-1)*1\\
+&= P->size \\
+&\implies O(P->size)\\
+\end{array}
+$$
+Les 2 fonctions sont donc linéaires.
+
+\paragraph{free\_Polyline}
+
+Soient a, le nombre d'opérations en dehors de la boucle et b, le nombre d'opérations à l'intérieur de la boucle.
+
+a et b sont de complexité O(1) car le nombre d'opérations est constant.
+
+$$
+\begin{array}{ll}
+T(P->size) 
+&= a + \displaystyle \sum_{i=0}^{(*P)->size-1}b \\
+&= 1 + ((*P)->size-1)  * 1\\
+&= (*P)->size\\
+&\implies O(P->size)\\
+\end{array}\\
+$$
+\subsubsection{PolylineList}
+
+\paragraph{add\_Point2D / remove\_Point2D / get\_Point2D}
+
+Ces 3 fonctions/procédures seront analysées simultanément car leur structure est similaire.
+
+Soient a, le nombre d'opération dans la fonction et b, le nombre d'opération dans la fonction récursive.
+La complexité vaut: T(position) = a + b, \\
+a est constante car le nombre d'opérations ne changes pas, calculons b et donc la complexité de la fonction récursive.
+
+Soient c, le nombre d'opération du cas de base et d, le nombre d'opération du cas récursif sans compter l'appel récursif.
+$$
+\begin{array}{ll}
+T(position) 
+&=\left\{
+    \begin{array}{ll}
+        c & \mbox{si } position = 0 \\
+        d + T(position-1) & \mbox{sinon}
+    \end{array}
+\right.\\
+&= d + T(position-1)\\
+&= 2*d + T(position-2)\\
+&= 3*d + T(position-3)\\
+&= k*d + T(position-k)\\
+&= position*d + T(0)\\
+&= position*d + c\\
+\end{array}
+$$
+
+Nous savons aussi que c et d ont un nombre d'opérations constant.
+Dans le pire des cas, position vaut P->size pour add\_Point2D et P->size-1 pour les 2 autres fonctions (vu les pré-conditions). Donc la complexité varie en fonction de P->size.
+
+$$
+\begin{array}{ll}
+T(P->size)
+&= a + b\\
+&= a + (P->size)*d + c\\
+&= P->size + 1\\
+&\implies O(P->size)\\
+\end{array}
+$$
+
+La complexité est donc linéaire.
+
+\paragraph{translate\_Polyline / rotate\_Polyline / free\_Polyline}
+
+Les structures de ces procédures étant relativement les mêmes, leur complexité seront évaluées simultanément.
+Soient a, le nombre d'opérations dans ces procédures sans compter l'appel aux procédures récursives et b, le nombre d'opérations dans les procédures récursives.
+
+Évaluons la complexité de b: \\
+Soient c, le nombre d'opérations du cas de base et d, le nombre d'opération du cas récursif en dehors de l'appel récursif.
+$$
+\begin{array}{ll}
+T(size)
+&=\left\{
+    \begin{array}{ll}
+        c & \mbox{si } size = 0 \\
+        d + T(size-1) & \mbox{sinon}
+    \end{array}
+\right.\\
+&= d + T(size-1)\\
+&= 2*d + T(size-2)\\
+&= 3*d + T(size-3)\\
+&= k*d + T(size-k)\\
+&= size*d + T(0) \text{\indent (Car d et c sont de complexité constante} \\
+&= size + 1 \text{\indent\indent\indent car le nombre d'opération ne varient pas)}\\
+\end{array}
+$$
+
+Ainsi, comme le nombre d'opérations dépend de P->size,
+$$
+\begin{array}{ll}
+T(P->size)
+     &= a + b \\
+     &= a + P->size + 1 \text{\indent (Comme size = P->size)} \\
+     &= P->size + 1 \text{\indent (Car le nombre d'opérations de a est constant)}\\
+     &\implies O(P->size)\\
+\end{array}
+$$
+
+La complexité de ces fonctions est donc linéaire.
+
+\section{Tests unitaires}
+Soient P une polyligne, A un point quelconque et i, k des naturels quelconques tel que: 0 $\leq$ k < i $\leq$ Size(P)
+\subsection{add\_Point2D}
+Après la commande add\_Point2D(P, A, i), on doit vérifier les 4 propriètes suivantes:
+\begin{enumerate}
+    \item la taille de la polyligne a été augmenté de 1: get\_size(P) = get\_size(P$_0$) + 1
+    \item les points de la polyligne à une position inférieure à i sont inchangés: $\forall$ j, $0\leq j<i$, get\_Point2D(P, j) = get\_Point2D(P$_0$, j)
+    \item les points de la polyligne à une position supérieure ou égale à i ont été décalés d'une position: $\forall$ j, $i\leq j<Size(P)$, get\_Point2D(P, j) = get\_Point2D(P$_0$, j-1)
+    \item le point A est un point de la polyligne à la position i: get\_Point2D(P, i) = A
+\end{enumerate}
+De plus, vu que nous avons décidé de mettre à jour la longueur de la polyligne à l'invocation de cette fonction, nous vérifions également que ce champ correspond bien à la nouvelle longueur attendue. C'est-à-dire: get\_length(P) = get\_length(P$_0$) - distance(get\_Point2D(P, i-1), get\_Point2D(P, i+1)) + distance(get\_Point2D(P, i-1), get\_Point2D(P, i)) + distance(get\_Point2D(P, i), get\_Point2D(P, i+1))
+
+\subsection{get\_size}
+La fonction get\_size(P) doit:
+\begin{enumerate}
+    \item renvoyer 2 s'il s'agit d'une polyligne que l'on vient juste de créer.
+    \item rester inchangée après les commandes suivantes: rotate\_Polyligne(P), translate\_Polyligne(P), close\_Polyligne(P), open\_Polyligne(P), get\_length(P). On vérifie donc que get\_size(P) = get\_size(P$_0$).
+    \item renvoyer une nouvelle valeur si l'on fait appel à la procédure add(P, A, i): get\_size(P) = get\_size(P$_0$) + 1 
+    \item renvoyer une nouvelle valeur si l'on fait appel à la procédure remove(P, i): get\_size(P) = get\_size(P$_0$) - 1 
+\end{enumerate}
+
+\section{Comparaison entre le tableau et la liste chaînée}
+
+\noindent A première vue on peut remarquer, trois différences:
+\begin{enumerate}
+    \item la plus part des transformateurs de la structure en liste font appel à des fonctions récursives
+    \item pour la structure en liste, la fonction get\_Point2D passe de complexité constante à linéaire.
+    \item le structure en tableau peut parfois occuper plus d'espace mémoire que nécessaire
+\end{enumerate}
+Le premier point, en théorie n'a aucun impact sur la complexité mais en pratique ces appels récursif sont forts couteux en temps (montée/descente récursive) et espace (création de contexte sur la pile). Elles seront donc beaucoup moins avantageuses que les implémentations itératives de la structure en tableau. Cependant, toutes ces fonctions, étant récursives terminales, peuvent être transformées en fonctions itératives. En effet pour ce, puisque l'on cherche souvent à simplement parcourir les différents points et éventuellement les modifier, il suffit d'utiliser une variable temporaire qui avance vers notre cas de base. Exemple pour transformer la fonction get\_Point2D\footnote{voir code source pour version récursive} en fonction itérative:
+
+\begin{lstlisting}
+Point2D* get_Point2D(Polyline* P, unsigned position){
+   assert(P && position < P->size);
+   
+   pointList* tmpPoint;
+   tmpPoint = P->head;
+   for(unsigned i=position; i!=0; i--)
+      tmpPoint = tmpPoint->next;
+   
+   return tmpPoint->point;
+   }
+\end{lstlisting}
+
+On a donc bien simplement utilisé des variables temporaires pour nous rapprocher du cas de base mais de manière itérative plutôt que récursive. Cette première différence peut donc être négligée.
+Quant au deuxième aspect, comme mentionné auparavant afin d'obtenir une information d'un élément dans liste nous sommes obligés de parcourir les éléments précédents. Cette fonction sera donc toujours plus rapide à l'exécution avec une structure en tableau et non en liste.
+Enfin, en termes de mémoire, la structure en liste, étant dynamique, est plus efficace. De fait, avec une structure en tableau la seule manière de ne pas gaspiller de la mémoire est d'invoquer la fonction realloc à chaque ajout et retrait de point de la polyligne. Cette fonction, bien que sa complexité soit considérée comme constante dans le cadre du cours, est couteuse. Il sera donc inefficace de l'invoquer aussi fréquemment.
+
+On peut en conclure qu'à condition d'éliminer la récursivité, la structure en liste a l'avantage d'être plus dynamique. Cependant, l'accès arbitraire en mémoire qu'offre la structure en tableau, met en désavantage cette structure lors de l'invocation de la fonction get\_Point2D.
 
 \end{document}

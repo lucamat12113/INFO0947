@@ -52,13 +52,13 @@ float get_time(Escale *step);
 
 /**
  * \fn void *get(Escale *step);
- * \brief get  
+ * \brief get an entire step whith all the informations from this stopover
  * 
  * \param step, the stepover to get. (!=NULL)
  * 
  * \return all the 'escale' ADT
  */ 
-void *get(Escale *step);
+Escale *get(Escale *step);
 
 /**
  * \fn float calc_distance(Escale *step1, Escale *step2);
@@ -70,15 +70,6 @@ void *get(Escale *step);
  * \return the distance between the two cities
  */
 float calc_distance(Escale *step_depart, Escale *step);
-
-/**
- * \fn double sqrt(square);
- * \brief calculates the square root (math.h)
- * 
- * \param square, the square  
- * 
- * \return the square root
- */
 
 
 #endif

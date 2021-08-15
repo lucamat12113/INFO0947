@@ -51,7 +51,7 @@ float get_time(Escale *step){
 }//end get_time()
 
 
-void *get(Escale *step){
+Escale *get(Escale *step){
 
     assert(step!=NULL);
 
