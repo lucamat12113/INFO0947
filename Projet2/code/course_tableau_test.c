@@ -1,5 +1,6 @@
 #include "seatest.h"
 #include "course.h"
+#include <stdlib.h>
 
 static void test_best_time_race(){
 
@@ -33,7 +34,7 @@ static void test_add_step(){
     add_step(race1, 2, step3);
     add_step(race2, 0, step1);
 
-    asseer_true(race1 == race2);   
+    assert_true(race1 == race2);   
 
     free(race2);
     free(race1);

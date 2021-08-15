@@ -1,5 +1,7 @@
 #include "seatest.h"
 #include "course.h"
+#include <stdlib.h>
+
 
 static void test_best_time_race(){
 
