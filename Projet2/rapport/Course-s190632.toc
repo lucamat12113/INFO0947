@@ -1,0 +1,24 @@
+\babel@toc {french}{}
+\contentsline {section}{\numberline {1}Signature et sémantique des TAD}{3}%
+\contentsline {subsection}{\numberline {1.1}Escale}{3}%
+\contentsline {subsection}{\numberline {1.2}Course}{3}%
+\contentsline {section}{\numberline {2}TAD Escale}{4}%
+\contentsline {subsection}{\numberline {2.1}Spécifications des fonctions et procédures}{4}%
+\contentsline {subsection}{\numberline {2.2}Structure}{4}%
+\contentsline {subsection}{\numberline {2.3}Gestion de la structure}{4}%
+\contentsline {section}{\numberline {3}TAD Course}{5}%
+\contentsline {subsection}{\numberline {3.1}Spécifications des fonctions et procédures}{5}%
+\contentsline {subsection}{\numberline {3.2}Structure en tableau}{5}%
+\contentsline {subsubsection}{\numberline {3.2.1}Présentation}{5}%
+\contentsline {subsubsection}{\numberline {3.2.2}Gestion de la structure en tableau}{6}%
+\contentsline {subsubsection}{\numberline {3.2.3}Schématisation}{6}%
+\contentsline {subsection}{\numberline {3.3}Structure basée sur une liste chaînée}{6}%
+\contentsline {subsubsection}{\numberline {3.3.1}Présentation}{6}%
+\contentsline {subsubsection}{\numberline {3.3.2}Gestion de la structure en liste}{7}%
+\contentsline {subsubsection}{\numberline {3.3.3}Implémentation}{7}%
+\contentsline {paragraph}{create}{7}%
+\contentsline {paragraph}{add\_step}{7}%
+\contentsline {section}{\numberline {4}Tests unitaires}{7}%
+\contentsline {subsection}{\numberline {4.1}best\_time\_race}{7}%
+\contentsline {subsection}{\numberline {4.2}add\_step}{7}%
+\contentsline {section}{\numberline {5}Comparaison entre le tableau et la liste}{8}%
