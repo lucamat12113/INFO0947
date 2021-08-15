@@ -3,13 +3,13 @@
 \contentsline {section}{\numberline {2}Spécification formelle}{3}%
 \contentsline {section}{\numberline {3}Découpe en sous problèmes}{3}%
 \contentsline {section}{\numberline {4}Invariant graphique et formel de la boucle}{3}%
-\contentsline {section}{\numberline {5}Approche constructive}{4}%
+\contentsline {section}{\numberline {5}Approche constructive}{3}%
 \contentsline {subsection}{\numberline {5.1}Code d'innitialisation de la boucle}{4}%
 \contentsline {subsection}{\numberline {5.2}Corps de la boucle}{4}%
 \contentsline {subsection}{\numberline {5.3}Code de terminaison de la boucle}{4}%
-\contentsline {section}{\numberline {6}Complexité}{5}%
-\contentsline {section}{\numberline {7}Code complet}{5}%
-\contentsline {subsection}{\numberline {7.1}main.c}{5}%
+\contentsline {section}{\numberline {6}Complexité}{4}%
+\contentsline {section}{\numberline {7}Code complet}{4}%
+\contentsline {subsection}{\numberline {7.1}main.c}{4}%
 \contentsline {subsection}{\numberline {7.2}multiplicite.c}{5}%
 \contentsline {subsection}{\numberline {7.3}multiplicite.h}{5}%
 \contentsline {subsection}{\numberline {7.4}makefile}{6}%
