@@ -1,7 +1,11 @@
 include Makefile.compilation
 
-all:
-	cd code; make all
+test_array:
+	cd code; make test_array
+	cd rapport; make all
+
+test_list:
+	cd code; make test_list
 	cd rapport; make all
 
 clean:
