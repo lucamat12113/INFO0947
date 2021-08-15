@@ -11,5 +11,3 @@
 \contentsline {section}{\numberline {7}Code complet}{4}%
 \contentsline {subsection}{\numberline {7.1}main.c}{4}%
 \contentsline {subsection}{\numberline {7.2}multiplicite.c}{5}%
-\contentsline {subsection}{\numberline {7.3}multiplicite.h}{5}%
-\contentsline {subsection}{\numberline {7.4}makefile}{6}%

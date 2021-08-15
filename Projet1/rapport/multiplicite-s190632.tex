@@ -274,53 +274,6 @@ int multiplicite(int *T, const int N,  int *max){
 \end{lstlisting}
 
 
-\subsection{multiplicite.h}
-
-\begin{lstlisting}[caption={multiplicite.h}]
-#ifndef __MULTIPLICITE_T__
-#define __MULTIPLICITE_T__
-
-/**
- * multiplicite
- * 
- * @pre : N > 0 $\land$ T[N]!= NULL
- * 
- * @post : max = max(T[N]) 
- * 
- * @return : multiplicite()=nombre d'occurence du maximum 
- * 
-**/
-
-int multiplicite(int *T, const int N,  int *max);
-
-#endif
-\end{lstlisting}
-
-
-\subsection{makefile}
-
-\begin{lstlisting}[caption={makefile}]
-CC=gcc
-LD=gcc
-CFLAGS=--std=c99 --pedantic -Wall -W -Wmissing-prototypes
-LDFLAGS=
-EXEC=output
-
-all:$(EXEC)
-
-output: main.o multiplicite.o
-	$(LD) -o output main.o multiplicite.o $(LDFLAGS)
-
-main.o: main.c
-	$(CC) -c main.c -o main.o $(CFLAGS)
-
-multiplicite.o: multiplicite.c multiplicite.h
-	$(CC) -c multiplicite.c -o multiplicite.o $(CFLAGS)
-\end{lstlisting}
-
-
-
-
 
 \end{document}
 
