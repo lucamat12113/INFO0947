@@ -4,8 +4,8 @@
 
 static void test_best_time_race(){
 
-    Escale *step1 = creation(50.632557, 5.579666, 'Liege');
-    Escale *step2 = creation(50.56515, 4.68843, 'Gembloux');
+    Escale *step1 = creation(50.632557, 5.579666, "Liege");
+    Escale *step2 = creation(50.56515, 4.68843, "Gembloux");
     Course *race = create(step1, step2);
 
     set_time(step1, 5.346);
@@ -23,9 +23,9 @@ static void test_best_time_race(){
 
 static void test_add_step(){
 
-    Escale *step1 = creation(50.632557, 5.579666, 'Liege');
-    Escale *step2 = creation(50.56515, 4.68843, 'Gembloux');
-    Escale *step3 = creation(50.850340, 4.351710, 'Bruxelles');
+    Escale *step1 = creation(50.632557, 5.579666, (char*)"Liege");
+    Escale *step2 = creation(50.56515, 4.68843, "Gembloux");
+    Escale *step3 = creation(50.850340, 4.351710, "Bruxelles");
     Course *race1 = create(step1, step2);
     Course *race2 = create(step2, step3);
 
