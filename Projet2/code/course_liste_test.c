@@ -1,13 +1,3 @@
-/**
- * \file course.h
- * \brief ADT for managing the 'Course' type
- * \author Luca Matagne -- Université de Liège (ULg)
- * \date 16/07/2021
- *
- * Presents a 'course' (race) as an abstract data type
- */
-
-
 #include "seatest.h"
 #include "course.h"
 
@@ -20,6 +10,8 @@ static void test_best_time_race(){
     set_time(step1, 5.346);
     set_time(step2, 12.447);
 
+    assert_false(best_time_race(race) < 0);
+    assert_true(best_time_race(race) == get_time(step1) + get_time(step2));
 
 
 }
