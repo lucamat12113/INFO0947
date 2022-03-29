@@ -13,7 +13,7 @@ LD=gcc
 LDFLAGS=
 
 # Files
-EXEC=exec
+EXEC=filtrer
 MODULES=main.c filtrer.c propriete.c
 OBJECTS=main.o filtrer.o propriete.o
 

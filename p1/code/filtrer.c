@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 #include "filtrer.h"
 #include "propriete.h"
 
@@ -30,5 +31,7 @@ int filtrer(int *T, int N){
         }
 
     }//fin while
+
+    return taille_utile;
 
 }//fin filtrer

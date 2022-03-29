@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "filtrer.h"
+#include "propriete.h"
 
 
 int main(){
