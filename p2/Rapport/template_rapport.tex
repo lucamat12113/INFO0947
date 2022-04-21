@@ -20,6 +20,7 @@
 \usepackage{color}
 \usepackage[table,xcdraw,dvipsnames]{xcolor}
 
+
 % Change le nom par défaut des listing
 \renewcommand{\lstlistingname}{Extrait de Code}
 
@@ -72,14 +73,14 @@
 
 %%%%%%%%%%%%%%%%% TITRE %%%%%%%%%%%%%%%%
 % Complétez et décommentez les définitions de macros suivantes :
-% \newcommand{\intitule}{Le titre du travail}
-% \newcommand{\GrNbr}{1742}
-% \newcommand{\PrenomUN}{Galileo}
-% \newcommand{\NomUN}{Galilei}
-% \newcommand{\PrenomDEUX}{Octave}
-% \newcommand{\NomDEUX}{Urbain}
+\newcommand{\intitule}{Polylignes, Milestone 1}
+\newcommand{\GrNbr}{06}
+\newcommand{\PrenomUN}{Maxime}
+\newcommand{\NomUN}{Deravet}
+\newcommand{\PrenomDEUX}{Luca}
+\newcommand{\NomDEUX}{Matagne}
 % Décommentez ceci si vous voulez une table des matières :
-% \renewcommand{\tablemat}{\tableofcontents}
+\renewcommand{\tablemat}{\tableofcontents}
 
 %%%%%%%% ZONE PROTÉGÉE : MODIFIEZ UNE DES DIX PROCHAINES %%%%%%%%
 %%%%%%%%            LIGNES POUR PERDRE 2 PTS.            %%%%%%%%
@@ -97,66 +98,44 @@
 %%%%%%%%%%%%%%%% RAPPORT %%%%%%%%%%%%%%%
 % Écrivez votre rapport ci-dessous.
 
-\section{Insérer du code Latex}
+\section{TAD: Point2D}
 
-\begin{lstlisting}[caption={Un programme tout simple}]
-int main(void)
-{
-	// Les commandes Latex sont permises dans les commentaires sur une ligne. Exemple : $x_i \leq a ^b$
-	printf("Bonjour tout le monde !");
-	/*
-	Dans les commentaires sur plusieurs lignes, elles doivent être entourées
-	de symboles définis par l'option « escapeinside » de \lstset
-	(>\coms{$\sum_{i = 1}^N 1 = N$}<)
-	La commande « \coms » permet de colorer correctement le code latex ajouté.
-	Les accents et tous les autres diacritiques sont permis : àÀçÇéÉèÈêÊœŒ...
-	*/
-	return 1; (>\label{code:ret}<)
-}
-\end{lstlisting}
+\subsection{Signature}
 
-Il est possible de faire référence à la ligne \ref{code:ret} de l'extrait de code.
+\noindent TYPE: Point2D
 
-\section{Dessiner un tableau}
+\noindent UTILISE: Réels ( $\mathbb{R}$ )
 
-Comme mentionné sur le forum «~\emph{eCampus > Forum : Projets -- Informations générales > Thème : Dessine-moi un Invariant Graphique !}~», il est possible de dessiner facilement des tableaux. Le résultat de l'exemple donné sur le forum eCampus est visible dans la Fig.~\ref{fig:exemple}.
+\noindent OPERATIONS: 
+\begin{itemize}
+    \item Create: $\mathbb{R} \times \mathbb{R} \xrightarrow{} Point2D$ {\color{green} C}
+    \item GetX: $Point2D \xrightarrow{} \mathbb{R}$ {\color{green} O}
+    \item GetY: $Point2d \xrightarrow{} \mathbb{R}$ {\color{green} O}
+    \item EuclDist: $Point2D \times Point2d \xrightarrow{} \mathbb{R}$ {\color{green} O}
+    \item Translate: $Point2D \times Point2d \xrightarrow{} Point2D$ {\color{green} T}
+    \item Rotate: $Point2D \times Point2d \times \mathbb{R} \xrightarrow{} Point2D $ {\color{green} T}
+\end{itemize}
 
-\begin{figure}[!h]
-\centering
-\begin{tabular}{l|llr|ll|l}
- & 0 &  & \multicolumn{1}{r|}{i-1} & i &  & N \\ \cline{2-6}
-t: & \cellcolor[HTML]{FFCC67} & \cellcolor[HTML]{FFCC67}. > 0 & \cellcolor[HTML]{FFCC67} &  &  &  \\ \cline{2-6}
-\end{tabular}
-\caption{Voici le tableau de l'exemple}
-\label{fig:exemple}
-\end{figure}
 
-N'oubliez pas non plus que l'outil GLIDE permet d'exporter un Invariant Graphique au format PDF.
 
-\section{Autres conseils}
+\subsection{Sémantique}
+\noindent PRECONDITIONS: Point2D est définit ssi X et Y $\in \mathbb{R}$ 
+\noindent AXIOMES: 
+\begin{itemize}
+    \item GetX(Create(X,Y)) = X
+    \item GetY(Create(X,Y)) = Y
+    
+\end{itemize}
 
-\subsection{Utilisez les bons opérateurs}
 
-Voir la table \ref{table:op}.
+\section{TAD: Polyligne}
 
-\begin{table}[!h]
-\centering
-\begin{tabular}{l c}
-Nom & Op \\
-\hline
-ET & $\land$ \\
-OU & $\lor$ \\
-Quantification universelle & $\forall$ \\
-Quantification existentielle & $\exists$ \\
-\end{tabular}
-\caption{Opérateurs les plus usuels en logique}
-\label{table:op}
-\end{table}
+\subsection{Signature}
 
-\subsection{Trouver un symbole précis}
 
-Voir ce site : \url{http://detexify.kirelabs.org/classify.html}. Il suffit de dessiner le symbole dont vous avez besoin et le site trouvera (normalement) la bonne commande à taper (ainsi que le package à éventuellement inclure si besoin est).
 
-\subsection{N'oubliez pas de relire le résultat produit par la compilation}
+\subsection{Sémantique}
+
+
 
 \end{document}
