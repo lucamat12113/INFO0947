@@ -120,6 +120,7 @@
 
 \subsection{Sémantique}
 \noindent PRECONDITIONS: Point2D est définit ssi X et Y $\in \mathbb{R}$ 
+
 \noindent AXIOMES: 
 \begin{itemize}
     \item GetX(Create(X,Y)) = X
@@ -144,18 +145,32 @@
 
 \noindent UTILISE: Point2D, Réels ($\mathbb{R}$), Naturels ($\mathbb{N}$), Boolean
 
+
 \noindent OPERATIONS: 
 \begin{itemize}
     \item Create: $Point2D \times Point2D \xrightarrow{} Polyligne$ {\color{green} C}
-    \item Close: $ $
-    \item  {\color{green} O}
-    \item  {\color{green} O}
-    \item
-    \item 
+    \item Close: $Polyligne \xrightarrow{} Polyligne$ {\color{green} T}
+    \item Open: $Polyligne \xrightarrow{} Polyligne$ {\color{green} T}
+    \item IsOpen: $Polyligne \xrightarrow{} Boolean$ {\color{green} O}
+    \item NbrPoint: $Polyligne \xrightarrow{} \mathbb{N}$ {\color{green} O}
+    \item GetPoint: $Polyligne \times \mathbb{N} \xrightarrow{} Point2D$ {\color{green} O}
+    \item AddPoint: $Polyligne \times \mathbb{N} \times Point2D \xrightarrow{} Polyligne${\color{green} T}
+    \item SuppPoint: $Polyligne \times \mathbb{N} \xrightarrow{} Polyligne$
+    \item Length: {\color{red} Poser la question }
+    \item PolyTranslate: $Polyligne \times Point2D \xrightarrow{} Polyligne$
+    \item PolyRotate: $Polyligne \times \mathbb{R} \times Point2D \xrightarrow{} Polyligne$
 \end{itemize}
 
 \subsection{Sémantique}
 
+\noindent PRECONDITIONS:
+\begin{itemize}
+    \item A RECOPIER DE LA FEUILLE
+\end{itemize}
 
+\noindent AXIOMES:
+\begin{itemize}
+    \item 
+\end{itemize}
 
 \end{document}
