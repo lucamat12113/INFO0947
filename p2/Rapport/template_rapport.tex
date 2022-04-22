@@ -124,7 +124,15 @@
 \begin{itemize}
     \item GetX(Create(X,Y)) = X
     \item GetY(Create(X,Y)) = Y
+    \item EuclDist(Create(X,Y), Create(A,B)) = $\sqrt{{(X-A)}^{2}+{(X-B)}^{2}}$
+    \item GetX(Translate(U,V)) = GetX(U) + GetX(V)
+    \item GetY(Translate(U,V)) = GetY(U) + GetY(V)
+    \item EuclDist(Translate(U,V)) = $\sqrt{{(GetX(U)-GetX(V))}^{2}+{(GetY(U)-GetY(V))}^{2}}$
+    \item GetX(Rotate(U,V,f)) = $cos(f) \times (GetX(U)-GetX(V)) - sin(f) \times (GetY(U)-GetY(V)) + GetX(V) $ 
+    \item GetY(Rotate(U,V,f)) = $sin(f) \times (GetX(U)-GetX(V)) + cos(f) \times (GetY(U)-GetY(V)) + GetY(V) $ 
+    \item EuclDist(Rotate(U,V),I,f)) =
     
+    $\sqrt{{(GetX(Rotate(U,V,f))-GetX(I))}^{2}+{(GetY(Rotate(U,V,f))-GetY(I))}^{2}}$
 \end{itemize}
 
 
@@ -132,7 +140,19 @@
 
 \subsection{Signature}
 
+\noindent TYPE: Polyligne
 
+\noindent UTILISE: Point2D, Réels ($\mathbb{R}$), Naturels ($\mathbb{N}$), Boolean
+
+\noindent OPERATIONS: 
+\begin{itemize}
+    \item Create: $Point2D \times Point2D \xrightarrow{} Polyligne$ {\color{green} C}
+    \item Close: $ $
+    \item  {\color{green} O}
+    \item  {\color{green} O}
+    \item
+    \item 
+\end{itemize}
 
 \subsection{Sémantique}
 
