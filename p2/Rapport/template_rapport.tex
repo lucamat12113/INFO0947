@@ -97,6 +97,14 @@
 
 %%%%%%%%%%%%%%%% RAPPORT %%%%%%%%%%%%%%%
 % Écrivez votre rapport ci-dessous.
+\section{Remarques}
+\begin{itemize}
+    \item Les notes en {\color{red}rouge} sont des aides mémoire pour le groupe afin de se souvenir de toutes nos questions à poser lors de la rencontre du lundi.
+    \item Les lettres en {\color{green}vert} dans les "OPERATIONS" permettent de distinguer les observateurs, les transformateurs et les créaateurs.
+\end{itemize}
+
+
+Les lettre
 
 \section{TAD: Point2D}
 
@@ -134,6 +142,8 @@
     \item EuclDist(Rotate(U,V),I,f)) =
     
     $\sqrt{{(GetX(Rotate(U,V,f))-GetX(I))}^{2}+{(GetY(Rotate(U,V,f))-GetY(I))}^{2}}$
+    
+    {\color{red} Poser la question (compartif des axiomes de la feuille et du milsetone (Axiome 3 ou 6 par exemple))}
 \end{itemize}
 
 
@@ -148,29 +158,41 @@
 
 \noindent OPERATIONS: 
 \begin{itemize}
-    \item Create: $Point2D \times Point2D \xrightarrow{} Polyligne$ {\color{green} C}
+    \item Create: $Point2D \times Point2D \xrightarrow{} Polyligne$ {\color{green} C} {\color{red} Poser la question du boolean}
     \item Close: $Polyligne \xrightarrow{} Polyligne$ {\color{green} T}
     \item Open: $Polyligne \xrightarrow{} Polyligne$ {\color{green} T}
     \item IsOpen: $Polyligne \xrightarrow{} Boolean$ {\color{green} O}
     \item NbrPoint: $Polyligne \xrightarrow{} \mathbb{N}$ {\color{green} O}
     \item GetPoint: $Polyligne \times \mathbb{N} \xrightarrow{} Point2D$ {\color{green} O}
     \item AddPoint: $Polyligne \times \mathbb{N} \times Point2D \xrightarrow{} Polyligne${\color{green} T}
-    \item SuppPoint: $Polyligne \times \mathbb{N} \xrightarrow{} Polyligne$
+    \item SuppPoint: $Polyligne \times \mathbb{N} \xrightarrow{} Polyligne$ {\color{green} T}
     \item Length: {\color{red} Poser la question }
-    \item PolyTranslate: $Polyligne \times Point2D \xrightarrow{} Polyligne$
-    \item PolyRotate: $Polyligne \times \mathbb{R} \times Point2D \xrightarrow{} Polyligne$
+    \item PolyTranslate: $Polyligne \times Point2D \xrightarrow{} Polyligne$ {\color{green} T}
+    \item PolyRotate: $Polyligne \times \mathbb{R} \times Point2D \xrightarrow{} Polyligne$ {\color{green} T}
 \end{itemize}
 
 \subsection{Sémantique}
 
 \noindent PRECONDITIONS:
 \begin{itemize}
-    \item A RECOPIER DE LA FEUILLE
+    \item Polyligne(A,B) est défini ssi A, B sont des Point2D définis
+    \item GetPoint(A,X) est défini ssi $0 \leq X < NbrPoint \& $ NbrPoint est défini
+    \item AddPoint(P,X,A) est défini ssi P est définie \& A est défini \& $0 \leq X < NbrPoint$
 \end{itemize}
 
 \noindent AXIOMES:
 \begin{itemize}
-    \item 
+    \item IsOpen(Open(Create(A,B))) = True
+    \item IsOpen(Close(Create(A,B))) = False
+    \item NbrPoint(AddPoint(P, X, C)) = NbrPoint(P) + 1
+    \item NbrPoint(AddPoint(P, X)) = NbrPoint(P) - 1
+    \item GetPoint(Create(A,B), 0) = A
+    \item GetPoint(AddPoint(P, X, C), X) = C
+    \item GetPoint(Close(P), 0) = GetPoint(Close(P), (NbrPoint-1))
+    \item GetPoint(PolyTranslate(P, C), X) =  Translate(GetPoint(P, X), C)
+    \item GetPoint(PolyRotate(P, C), X) =  Rotate(GetPoint(P, X), C)
+    {\color{red} (est-ce qu'on peut utiliser les axiomes de Point2D dans les axiomes de Polyligne?)}
+    \item {\color{red} Pas d'axiomes sur 'Length' vu la question à poser au sujet de cette fonction}
 \end{itemize}
 
 \end{document}
