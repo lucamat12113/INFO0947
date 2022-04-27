@@ -1,0 +1,197 @@
+\documentclass[a4paper, 11pt, oneside]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{array}
+\usepackage{shortvrb}
+\usepackage{listings}
+\usepackage[fleqn]{amsmath}
+\usepackage{amsfonts}
+\usepackage{fullpage}
+\usepackage{enumerate}
+\usepackage{graphicx}             % import, scale, and rotate graphics
+\usepackage{subfigure}            % group figures
+\usepackage{alltt}
+\usepackage{url}
+\usepackage{indentfirst}
+\usepackage{eurosym}
+\usepackage{listings}
+\usepackage{color}
+\usepackage[table,xcdraw,dvipsnames]{xcolor}
+
+
+% Change le nom par défaut des listing
+\renewcommand{\lstlistingname}{Extrait de Code}
+
+% Change la police des titres pour convenir à votre seul lecteur
+\usepackage{sectsty}
+\allsectionsfont{\sffamily\mdseries\upshape}
+% Idem pour la table des matière.
+\usepackage[nottoc,notlof,notlot]{tocbibind}
+\usepackage[titles,subfigure]{tocloft}
+\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape}
+
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\newcommand{\coms}[1]{\textcolor{MidnightBlue}{#1}}
+
+\lstset{
+    language=C, % Utilisation du langage C
+    commentstyle={\color{MidnightBlue}}, % Couleur des commentaires
+    frame=single, % Entoure le code d'un joli cadre
+    rulecolor=\color{black}, % Couleur de la ligne qui forme le cadre
+    stringstyle=\color{RawSienna}, % Couleur des chaines de caractères
+    numbers=left, % Ajoute une numérotation des lignes à gauche
+    numbersep=5pt, % Distance entre les numérots de lignes et le code
+    numberstyle=\tiny\color{mygray}, % Couleur des numéros de lignes
+    basicstyle=\tt\footnotesize,
+    tabsize=3, % Largeur des tabulations par défaut
+    keywordstyle=\tt\bf\footnotesize\color{Sepia}, % Style des mots-clés
+    extendedchars=true,
+    captionpos=b, % sets the caption-position to bottom
+    texcl=true, % Commentaires sur une ligne interprétés en Latex
+    showstringspaces=false, % Ne montre pas les espace dans les chaines de caractères
+    escapeinside={(>}{<)}, % Permet de mettre du latex entre des <( et )>.
+    inputencoding=utf8,
+    literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\`E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+  {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+}
+\newcommand{\tablemat}{~}
+
+%%%%%%%%%%%%%%%%% TITRE %%%%%%%%%%%%%%%%
+% Complétez et décommentez les définitions de macros suivantes :
+\newcommand{\intitule}{Polylignes, Milestone 1}
+\newcommand{\GrNbr}{06}
+\newcommand{\PrenomUN}{Maxime}
+\newcommand{\NomUN}{Deravet}
+\newcommand{\PrenomDEUX}{Luca}
+\newcommand{\NomDEUX}{Matagne}
+% Décommentez ceci si vous voulez une table des matières :
+\renewcommand{\tablemat}{\tableofcontents}
+
+%%%%%%%% ZONE PROTÉGÉE : MODIFIEZ UNE DES DIX PROCHAINES %%%%%%%%
+%%%%%%%%            LIGNES POUR PERDRE 2 PTS.            %%%%%%%%
+\title{INFO0947: \intitule}
+\author{Groupe \GrNbr : \PrenomUN~\textsc{\NomUN}, \PrenomDEUX~\textsc{\NomDEUX}}
+\date{}
+\begin{document}
+
+\maketitle
+\newpage
+\tablemat
+\newpage
+%%%%%%%%%%%%%%%%%%%% FIN DE LA ZONE PROTÉGÉE %%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%% RAPPORT %%%%%%%%%%%%%%%
+% Écrivez votre rapport ci-dessous.
+\section{Remarques}
+\begin{itemize}
+    \item Les notes en {\color{red}rouge} sont des aides mémoire pour le groupe afin de se souvenir de toutes nos questions à poser lors de la rencontre du lundi.
+    \item Les lettres en {\color{green}vert} dans les "OPERATIONS" permettent de distinguer les observateurs, les transformateurs et les créaateurs.
+\end{itemize}
+
+
+\section{TAD: Point2D}
+
+\subsection{Signature}
+
+\noindent TYPE: Point2D
+
+\noindent UTILISE: Réels 
+
+\noindent OPERATIONS: 
+\begin{itemize}
+    \item Create: Réels $\times$ Réels $\xrightarrow{}$ Point2D {\color{green} C}
+    \item GetX: $Point2D \xrightarrow{}$ Réels {\color{green} O}
+    \item GetY: $Point2d \xrightarrow{}$ Réels {\color{green} O}
+    \item EuclDist: $Point2D \times Point2d \xrightarrow{}$ Réels {\color{green} O}
+    \item Translate: $Point2D \times Point2d \xrightarrow{} Point2D$ {\color{green} T}
+    \item Rotate: $Point2D \times Point2d  \times $ Réels $\xrightarrow{} Point2D $ {\color{green} T}
+\end{itemize}
+
+
+
+\subsection{Sémantique}
+\noindent PRECONDITIONS:
+
+\noindent AXIOMES: 
+$\forall X,Y \in Reels$
+\begin{itemize}
+    \item GetX(Create(X,Y)) = X
+    \item GetY(Create(X,Y)) = Y
+    \item EuclDist(X,Y) = $\sqrt{{(GetX(X)-GetX(Y))}^{2}+{(GetY(X)-GetY(Y))}^{2}}$
+    \item GetX(Translate(U,V)) = GetX(U) + GetX(V)
+    \item GetY(Translate(U,V)) = GetY(U) + GetY(V)
+    \item EuclDist(Translate(U,V)) = $\sqrt{{(GetX(U)-GetX(V))}^{2}+{(GetY(U)-GetY(V))}^{2}}$
+    \item GetX(Rotate(U,V,f)) = $cos(f) \times (GetX(U)-GetX(V)) - sin(f) \times (GetY(U)-GetY(V)) + GetX(V) $ 
+    \item GetY(Rotate(U,V,f)) = $sin(f) \times (GetX(U)-GetX(V)) + cos(f) \times (GetY(U)-GetY(V)) + GetY(V) $ 
+    \item EuclDist(Rotate(U,V),I,f)) =
+    
+    $\sqrt{{(GetX(Rotate(U,V,f))-GetX(I))}^{2}+{(GetY(Rotate(U,V,f))-GetY(I))}^{2}}$
+    
+    {\color{red} Poser la question (compartif des axiomes de la feuille et du milsetone (Axiome 3 ou 6 par exemple))}
+\end{itemize}
+
+
+\section{TAD: Polyligne}
+
+\subsection{Signature}
+
+\noindent TYPE: Polyligne
+
+\noindent UTILISE: Point2D, Réels ($\mathbb{R}$), Naturels ($\mathbb{N}$), Boolean
+
+
+\noindent OPERATIONS: 
+\begin{itemize}
+    \item Create: $Point2D \times Point2D \xrightarrow{} Polyligne$ {\color{green} C} {\color{red} Poser la question du boolean}
+    \item Close: $Polyligne \xrightarrow{} Polyligne$ {\color{green} T}
+    \item Open: $Polyligne \xrightarrow{} Polyligne$ {\color{green} T}
+    \item IsOpen: $Polyligne \xrightarrow{} Boolean$ {\color{green} O}
+    \item NbrPoint: $Polyligne \xrightarrow{} \mathbb{N}$ {\color{green} O}
+    \item GetPoint: $Polyligne \times \mathbb{N} \xrightarrow{} Point2D$ {\color{green} O}
+    \item AddPoint: $Polyligne \times \mathbb{N} \times Point2D \xrightarrow{} Polyligne${\color{green} T}
+    \item SuppPoint: $Polyligne \times \mathbb{N} \xrightarrow{} Polyligne$ {\color{green} T}
+    \item Length: {\color{red} Poser la question }
+    \item PolyTranslate: $Polyligne \times Point2D \xrightarrow{} Polyligne$ {\color{green} T}
+    \item PolyRotate: $Polyligne \times \mathbb{R} \times Point2D \xrightarrow{} Polyligne$ {\color{green} T}
+\end{itemize}
+
+\subsection{Sémantique}
+
+\noindent PRECONDITIONS:
+\begin{itemize}
+    \item Polyligne(A,B) est défini ssi A, B sont des Point2D définis
+    \item GetPoint(A,X) est défini ssi $0 \leq X < NbrPoint \& $ NbrPoint est défini
+    \item AddPoint(P,X,A) est défini ssi P est définie \& A est défini \& $0 \leq X < NbrPoint$
+\end{itemize}
+
+\noindent AXIOMES:
+\begin{itemize}
+    \item IsOpen(Open(Create(A,B))) = True
+    \item IsOpen(Close(Create(A,B))) = False
+    \item NbrPoint(AddPoint(P, X, C)) = NbrPoint(P) + 1
+    \item NbrPoint(AddPoint(P, X)) = NbrPoint(P) - 1
+    \item GetPoint(Create(A,B), 0) = A
+    \item GetPoint(AddPoint(P, X, C), X) = C
+    \item GetPoint(Close(P), 0) = GetPoint(Close(P), (NbrPoint-1))
+    \item GetPoint(PolyTranslate(P, C), X) =  Translate(GetPoint(P, X), C)
+    \item GetPoint(PolyRotate(P, C), X) =  Rotate(GetPoint(P, X), C)
+    {\color{red} (est-ce qu'on peut utiliser les axiomes de Point2D dans les axiomes de Polyligne?)}
+    \item {\color{red} Pas d'axiomes sur 'Length' vu la question à poser au sujet de cette fonction}
+\end{itemize}
+
+\end{document}
