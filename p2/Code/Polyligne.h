@@ -109,7 +109,7 @@ Point2D* GetPoint(Polyligne* P, unsigned int numero);
  * 
  * @return Le nombre de points de la polyligne 
  */
-Polyligne AddPoint(Polyligne* P, Point2D* A);
+Polyligne* AddPoint(Polyligne* P, Point2D* A);
 
 
 /**
@@ -123,7 +123,7 @@ Polyligne AddPoint(Polyligne* P, Point2D* A);
  * 
  * @return Le nombre de points de la polyligne 
  */
-Polyligne SuppPoint(Polyligne* P);
+Polyligne* SuppPoint(Polyligne* P);
 
 
 /**
@@ -140,6 +140,35 @@ Polyligne SuppPoint(Polyligne* P);
 float Length(Polyligne* P);
 
 
+/**
+ * @fn Polyligne PolyTranslate(Polyligne* P, Point2D* A);
+ * @brief Fait subir la translation de point A à le polyligne P
+ * 
+ * @param P, La Polyligne qui va subir la translation
+ * @param A, Le poit de référence de la translation
+ * 
+ * @pre P != NULL 
+ * @post ////////////////////////////////////////////////////////////
+ * 
+ * @return La longueur de la polyligne
+ */
+Polyligne* PolyTranslate(Polyligne* P, Point2D* A);
+
+
+/**
+ * @fn Polyligne PolyRotate(Polyligne* P, Point2D* A, float, x);
+ * @brief Fait subir la rotation de point A et d'angle x à la polyligne P
+ * 
+ * @param P, La Polyligne qui va subir la rotation
+ * @param A, Le poit de référence de la rotation
+ * @param x, angle de rotation (en degrés) de P par rapport à A (sens trigonométrique)
+ * 
+ * @pre P != NULL 
+ * @post ////////////////////////////////////////////////////////////
+ * 
+ * @return La longueur de la polyligne
+ */
+Polyligne* PolyRotate(Polyligne* P, Point2D* A, float x);
 
 
 #endif
