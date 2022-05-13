@@ -1,8 +1,0 @@
-\babel@toc {french}{}
-\contentsline {section}{\numberline {1}Remarques}{3}%
-\contentsline {section}{\numberline {2}TAD: Point2D}{3}%
-\contentsline {subsection}{\numberline {2.1}Signature}{3}%
-\contentsline {subsection}{\numberline {2.2}Sémantique}{3}%
-\contentsline {section}{\numberline {3}TAD: Polyligne}{3}%
-\contentsline {subsection}{\numberline {3.1}Signature}{3}%
-\contentsline {subsection}{\numberline {3.2}Sémantique}{4}%

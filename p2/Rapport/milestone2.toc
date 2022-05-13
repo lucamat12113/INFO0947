@@ -1,9 +1,0 @@
-\babel@toc {french}{}
-\contentsline {section}{\numberline {1}Remarques}{3}%
-\contentsline {section}{\numberline {2}Structures de données}{3}%
-\contentsline {subsection}{\numberline {2.1}Point2D: fonctions et structure}{3}%
-\contentsline {subsection}{\numberline {2.2}Polyligne: fonctions et structure}{3}%
-\contentsline {section}{\numberline {3}Invariants}{4}%
-\contentsline {subsection}{\numberline {3.1}length}{4}%
-\contentsline {subsection}{\numberline {3.2}Rotate}{5}%
-\contentsline {subsection}{\numberline {3.3}Translate}{5}%
