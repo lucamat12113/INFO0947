@@ -4,10 +4,10 @@
 
 #include "Point2D.h"
 
-typedef struct Point2D_t{
+struct Point2D_t{
     float x;
     float y;
-}Point2D;
+};
 
 Point2D *create_point(float x, float y){
     Point2D *pt = malloc(sizeof(Point2D));
