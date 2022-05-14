@@ -10,12 +10,13 @@
  * @brief Structure de donnée représentant liste doublement chainée
  * 
  */
-typedef struct cell_t{
+typedef struct cell_t cell;
+struct cell_t{
     cell* prec;
     Point2D *data;
     cell* suiv;
 
-}cell;
+};
 
 
 
@@ -28,25 +29,7 @@ struct Polyligne_t{
 };
 
 
-/**
- * @fn static cell *create_cell(Polyligne *data)
- * @brief Crée une nouvelle cellule
- *
- * @param data, la polyligne à stocker dans la partie utile de la cellule
- * 
- * @return un pointuer vers la nouvelle cellule créée, elle n'est liéeà rien pour l'instant.
- */
-static cell *create_cell(Polyligne *data){
-    cell *n_cell = malloc(sizeof(cell));
-    if(n_cell==NULL)
-        return NULL;
-    
-    n_cell->prec = NULL;
-    n_cell->data = data;
-    n_cell->suiv = NULL;
-    
-    return n_cell;
-}//end create_cell()
+
 
 
 
@@ -75,11 +58,13 @@ Polyligne *CreatePolyligne(Point2D *A, Point2D *B){
     P->nbpoint = 2;
     P->length = EuclDist(A,B);
     AddPoint(P, A);
-    P->tete = A;
-    P->queue = A;
+    P->tete->data = A;
+    P->queue->data = A;
     AddPoint(P,B);
-    P->queue = B;
+    P->queue->data = B;
     P->open = True;   
+
+    return P;
 
 }//end createPolyligne()
 
@@ -97,7 +82,7 @@ void Close(Polyligne* P){
     assert(P!=NULL);
 
     if(P->open==True)
-        AddPoint(P, P->tete);
+        AddPoint(P, P->tete->data);
 
 }//end Close()
 
@@ -119,7 +104,7 @@ unsigned int NbrPoint(Polyligne* P){
 
 
 Point2D* GetPoint(Polyligne* P, unsigned int numero){
-    assert(P!=NULL && 0 <= numero && numero < P->nbpoint);
+    assert(P!=NULL && numero < P->nbpoint);
 
 ////////////////////////////////////////////////////////////
 
@@ -155,7 +140,7 @@ Polyligne* AddPoint(Polyligne* P, Point2D* A){
     }
 
     P->nbpoint += 1;
-    P->length += EuclDist(old_queue,A);
+    P->length += EuclDist(old_queue->data,A);
     old_queue = NULL;
     free(old_queue);
 
@@ -180,7 +165,7 @@ Polyligne* SuppPoint(Polyligne* P){
     }
 
 
-    P->length -= EuclDist(P->queue->prec, P->queue);
+    P->length -= EuclDist(P->queue->prec->data, P->queue->data);
     P->nbpoint -=1;
 
     cell *n_cell = malloc(sizeof(cell));
