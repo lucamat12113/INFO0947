@@ -86,11 +86,45 @@ Polyligne *CreatePolyligne(Point2D *A, Point2D *B){
 
 void Open(Polyligne* P){   
     assert(P!=NULL);
-    
 
+    if(P->open==False)
+        SuppPoint(P);
 
 }//end Open()
 
+
+void Close(Polyligne* P){   
+    assert(P!=NULL);
+
+    if(P->open==True)
+        AddPoint(P, P->tete);
+
+}//end Close()
+
+
+Boolean IsOpen(Polyligne* P){
+    assert(P!=NULL);
+
+    return(P->open);
+
+}// en IsOpen
+
+
+unsigned int NbrPoint(Polyligne* P){
+    assert(P!=NULL);
+
+    return(P->nbpoint);
+
+}//end NbrPoint()
+
+
+Point2D* GetPoint(Polyligne* P, unsigned int numero){
+    assert(P!=NULL && 0 <= numero && numero < P->nbpoint);
+
+////////////////////////////////////////////////////////////
+
+
+}//end GetPoint()
 
 
 Polyligne* AddPoint(Polyligne* P, Point2D* A){
@@ -104,7 +138,12 @@ Polyligne* AddPoint(Polyligne* P, Point2D* A){
 
     n_cell->suiv = NULL;
     
-    cell* old_queue = P->queue;
+    cell *old_queue = malloc(sizeof(cell));
+    if(old_queue==NULL)
+        return NULL;
+
+    old_queue = P->queue;
+
     if(P->queue == NULL){
         P->queue = n_cell;
         P->tete = n_cell;
@@ -129,3 +168,57 @@ Polyligne* AddPoint(Polyligne* P, Point2D* A){
     return P;
 
 }//end add()
+
+
+Polyligne* SuppPoint(Polyligne* P){
+    assert(P!=NULL);
+
+    if(P->queue->prec == P->tete)
+        P->open = False;
+    else{
+        P->open = True;
+    }
+
+
+    P->length -= EuclDist(P->queue->prec, P->queue);
+    P->nbpoint -=1;
+
+    cell *n_cell = malloc(sizeof(cell));
+    if(n_cell==NULL)
+        return NULL;
+    
+    n_cell = P->queue;
+
+    P->queue->data = NULL;
+    P->queue->prec = NULL;
+
+    P->queue = n_cell->prec;
+
+    n_cell = NULL;
+    free(n_cell);
+
+}
+
+
+float Length(Polyligne* P){
+    assert(P!=NULL);
+    
+    return(P->length);
+
+}
+
+
+Polyligne* PolyTranslate(Polyligne* P, Point2D* A){
+
+
+/////////////////////////////////////////////////////////////
+
+}
+
+
+
+Polyligne* PolyRotate(Polyligne* P, Point2D* A, float x){
+
+/////////////////////////////////////////////////////////////
+
+}
