@@ -55,13 +55,15 @@ Polyligne *CreatePolyligne(Point2D *A, Point2D *B){
     assert(A!=NULL && B!=NULL && A!=B);
 
     Polyligne* P = create_senti();
+   
+
+    AddPoint(P, A);
+ 
+    AddPoint(P, B);
+
     P->nbpoint = 2;
     P->length = EuclDist(A,B);
-    AddPoint(P, A);
-    P->tete->data = A;
-    P->queue->data = A;
-    AddPoint(P,B);
-    P->queue->data = B;
+
     P->open = True;   
 
     return P;
@@ -119,15 +121,10 @@ Polyligne* AddPoint(Polyligne* P, Point2D* A){
     if(n_cell==NULL)
         return NULL;
     
+    n_cell->prec = NULL;
     n_cell->data = A;
-
     n_cell->suiv = NULL;
     
-    cell *old_queue = malloc(sizeof(cell));
-    if(old_queue==NULL)
-        return NULL;
-
-    old_queue = P->queue;
 
     if(P->queue == NULL){
         P->queue = n_cell;
@@ -140,9 +137,8 @@ Polyligne* AddPoint(Polyligne* P, Point2D* A){
     }
 
     P->nbpoint += 1;
-    P->length += EuclDist(old_queue->data,A);
-    old_queue = NULL;
-    free(old_queue);
+    P->length += EuclDist(P->queue->prec->data,P->queue->data);
+    
 
     if(P->queue == P->tete)
         P->open = False;
