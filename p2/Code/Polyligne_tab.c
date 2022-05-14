@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
 #include <math.h>
@@ -17,7 +16,14 @@ struct Polyligne_t{
     Point2D** pointArray;
 };
 
-
+/**
+ * @fn static Polyligne*  ReallocArray(Polyligne* P){
+ * @brief multiplie par deux la taille du tableau
+ *
+ * @param P, La Polyligne dont on veut multiplier la taille du  tableau qui la contient
+ *
+ * @return La polyligne P après la réallocation de la mémoire du tableau
+ */
 static Polyligne*  ReallocArray(Polyligne* P){
     assert(P!=NULL);
     
@@ -33,7 +39,7 @@ static Polyligne*  ReallocArray(Polyligne* P){
 
 
 Polyligne *CreatePolyligne(Point2D *A, Point2D *B){
-    assert(A != NULL && B != NULL);
+    assert(A != NULL && B != NULL && A != B);
 
 
     Polyligne* P = malloc(sizeof(Polyligne));
