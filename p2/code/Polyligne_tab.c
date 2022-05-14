@@ -113,7 +113,7 @@ unsigned int NbrPoint(Polyligne* P){
 
 
 Point2D* GetPoint(Polyligne* P, unsigned int numero){
-    assert(P!=NULL && 0 <= numero && numero < P->nbpoint);
+    assert(P!=NULL && numero < P->nbpoint);
 
     return P->pointArray[numero];
 

@@ -66,7 +66,7 @@ void TranslatePoint2D(Point2D* A, Point2D* B){
 }//end TranslatePoint2D()
 
 
-void TranslatePoint2D(Point2D* A, Point2D* B, float x){
+void RotatePoint2D(Point2D* A, Point2D* B, float x){
     assert(A!=NULL && B!=NULL);
 
     Point2D* Anew = A;
