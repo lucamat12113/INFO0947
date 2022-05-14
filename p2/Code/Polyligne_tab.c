@@ -45,10 +45,11 @@ Polyligne *CreatePolyligne(Point2D *A, Point2D *B){
     P->open = True;
 
     P->pointArray = malloc(INITIAL_SIZE * sizeof(Polyligne*));
-    if(P->pointArray==NULL);
+    if(P->pointArray==NULL){
         free(P);
 
         return NULL;
+    }
 
     for(unsigned int i=0; i<INITIAL_SIZE; i++){
         P->pointArray[i] = NULL;
@@ -65,9 +66,10 @@ Polyligne *CreatePolyligne(Point2D *A, Point2D *B){
 void Open(Polyligne* P){
     assert(P!=NULL);
 
-    if(P->open != True)
+    if(P->open != True){
         P->open = True;
         SuppPoint(P);
+    }
 
 }//end Open()
 
@@ -75,9 +77,10 @@ void Open(Polyligne* P){
 void Close(Polyligne* P){
     assert(P!=NULL);
 
-    if(P->open == True)
+    if(P->open == True){
         P->open = False;
         AddPoint(P, P->pointArray[0]);
+    }
 
 }//end Close()
 
@@ -104,7 +107,7 @@ unsigned int NbrPoint(Polyligne* P){
 
 
 Point2D* GetPoint(Polyligne* P, unsigned int numero){
-    assert(P!=NULL && 0 < numero <= P->nbpoint);
+    assert(P!=NULL && 0 < numero && numero < P->nbpoint + 1);
 
     return P->pointArray[numero-1];
 ////////////////////////////demander avis de max mais je pref comme ca////////////////:///
@@ -173,7 +176,7 @@ Polyligne* PolyTranslate(Polyligne* P, Point2D* A){
 
 
 Polyligne* PolyRotate(Polyligne* P, Point2D* A, float x){
-    assert(P!=NULL && A!=NULL && 0<= x <= 360);
+    assert(P!=NULL && A!=NULL && 0<= x && x <= 360);
 
     for(unsigned int i=0; i<P->nbpoint; i++){
 
