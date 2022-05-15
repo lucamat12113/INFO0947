@@ -198,17 +198,20 @@ Polyligne* SuppPoint(Polyligne* P){
 
 
     P->length -= EuclDist(P->queue->prec->data, P->queue->data);
-    P->nbpoint -=1;
+    P->nbpoint -= 1;
 
     cell *n_cell = CreateCell();
 
     n_cell = P->queue;
 
+
     P->queue->data = NULL;
     P->queue->prec->suiv = NULL;
-    P->queue->prec = NULL;
 
     P->queue = n_cell->prec;
+
+    n_cell->prec = NULL;
+
 
 
     return P;
@@ -224,12 +227,12 @@ float Length(Polyligne* P){
 }//end length()
 
 
-static void PolyTranslateRec(cell* C, Point2D* A){
+static Polyligne* PolyTranslateRec(cell* C, Point2D* A){
     assert(C!=NULL);
 
     if(C->suiv!=NULL){
         TranslatePoint2D(C->data, A);
-        PolyTranslateRec(C->suiv,A);
+        return PolyTranslateRec(C->suiv,A);
     }
     else{
         TranslatePoint2D(C->data, A);

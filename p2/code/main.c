@@ -73,7 +73,7 @@ int main(){
     lon = Length(P1);
     printf("longueur = %f\n", lon);
 
-    SuppPoint(P1);
+    SuppPoint(P1);///////////////////////PLUS DE PROBLEME////////////////////////
     SuppPoint(P1);
 
     nb = NbrPoint(P1);
