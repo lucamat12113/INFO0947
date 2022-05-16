@@ -237,9 +237,6 @@ static Polyligne* PolyTranslateRec(Polyligne* P,cell* C, Point2D* A){
         return P;
     }
     
-
-    
-    
 }
 
 
@@ -267,8 +264,6 @@ static Polyligne* PolyRotateRec(Polyligne* P, cell* C, Point2D* A, float x){
         return P;
     }
 
-    
-    
 }
 
 Polyligne* PolyRotate(Polyligne* P, Point2D* A, float x){
