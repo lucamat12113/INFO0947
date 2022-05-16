@@ -36,6 +36,9 @@ int main(){
     //Open(P1);
     //Close(P1);
 
+    float lon = Length(P1);
+    lon = Length(P1);
+    printf("longueur = %f\n", lon);
 
 
     int nb = NbrPoint(P1);
@@ -50,7 +53,7 @@ int main(){
     int o = IsOpen(P1);
     printf("ouvert? %u\n", o);
 
-    float lon = Length(P1);
+    
 
 
     P1 = AddPoint(P1, b);
